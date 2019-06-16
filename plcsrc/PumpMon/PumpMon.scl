@@ -1,0 +1,2072 @@
+(*
+ *
+ * File: PumpMon.scl
+ *
+ * IEC 61131-3 Structured Text (ST) code generated for subsystem "TestLib/PumpMon1"
+ *
+ * Model name                      : TestLib
+ * Model version                   : 1.200
+ * Model creator                   : Konstantin
+ * Model last modified by          : Konstantin
+ * Model last modified on          : Mon May 27 13:24:09 2019
+ * Model sample time               : 0.1s
+ * Subsystem name                  : TestLib/PumpMon1
+ * Subsystem sample time           : 0.1s
+ * Simulink PLC Coder version      : 3.0 (R2019a) 23-Nov-2018
+ * ST code generated on            : Mon May 27 14:14:52 2019
+ *
+ * Target IDE selection            : Siemens TIA Portal
+ * Test Bench included             : No
+ *
+ *)
+TYPE DigVal
+    STRUCT
+        Value: BOOL;
+        QC: INT;
+    END_STRUCT
+END_TYPE
+TYPE AnaVal
+    STRUCT
+        Value: REAL;
+        QC: INT;
+    END_STRUCT
+END_TYPE
+FUNCTION_BLOCK Utils_SelST16_l
+VAR_INPUT
+    InST: ARRAY [0..15] OF INT;
+END_VAR
+VAR_OUTPUT
+    out: INT;
+END_VAR
+VAR
+    b: ARRAY [0..3] OF INT := [0,1,2,3];
+    tf: BOOL;
+    k: DINT;
+    exitg1: DINT;
+END_VAR
+(* 'Utils:4' if Num < 1 || Num > 16 *)
+(* 'Utils:9' switch SelPrio *)
+(* 'Utils:10' case 0 *)
+(* 'Utils:11' if ismember(QCcodes.Simulation, InST(1:Num)) *)
+tf := FALSE;
+k := 0;
+REPEAT 
+    exitg1 := 0;
+    IF k < 4 THEN 
+        IF 96 = InST[INT_TO_DINT(b[k])] THEN 
+            tf := TRUE;
+            exitg1 := 1;
+        ELSE 
+            k := k + 1;
+        END_IF;
+    ELSE 
+        exitg1 := 1;
+    END_IF;
+UNTIL NOT(exitg1 = 0)
+END_REPEAT;
+IF tf THEN 
+    (* 'Utils:12' out = int16(QCcodes.Simulation); *)
+    out := 96;
+ELSE 
+    k := 0;
+    REPEAT 
+        exitg1 := 0;
+        IF k < 4 THEN 
+            IF 0 = InST[INT_TO_DINT(b[k])] THEN 
+                tf := TRUE;
+                exitg1 := 1;
+            ELSE 
+                k := k + 1;
+            END_IF;
+        ELSE 
+            exitg1 := 1;
+        END_IF;
+    UNTIL NOT(exitg1 = 0)
+    END_REPEAT;
+    IF tf THEN 
+        (* 'Utils:14' elseif ismember(QCcodes.Bad, InST(1:Num)) *)
+        (* 'Utils:15' out = int16(QCcodes.Bad); *)
+        out := 0;
+    ELSE 
+        k := 0;
+        REPEAT 
+            exitg1 := 0;
+            IF k < 4 THEN 
+                IF 40 = InST[INT_TO_DINT(b[k])] THEN 
+                    tf := TRUE;
+                    exitg1 := 1;
+                ELSE 
+                    k := k + 1;
+                END_IF;
+            ELSE 
+                exitg1 := 1;
+            END_IF;
+        UNTIL NOT(exitg1 = 0)
+        END_REPEAT;
+        IF tf THEN 
+            (* 'Utils:17' elseif ismember(QCcodes.BadProcess, InST(1:Num)) *)
+            (* 'Utils:18' out = int16(QCcodes.BadProcess); *)
+            out := 40;
+        ELSE 
+            k := 0;
+            REPEAT 
+                exitg1 := 0;
+                IF k < 4 THEN 
+                    IF 104 = InST[INT_TO_DINT(b[k])] THEN 
+                        tf := TRUE;
+                        exitg1 := 1;
+                    ELSE 
+                        k := k + 1;
+                    END_IF;
+                ELSE 
+                    exitg1 := 1;
+                END_IF;
+            UNTIL NOT(exitg1 = 0)
+            END_REPEAT;
+            IF tf THEN 
+                (* 'Utils:20' elseif ismember(QCcodes.Uncertain, InST(1:Num)) *)
+                (* 'Utils:21' out = int16(QCcodes.Uncertain); *)
+                out := 104;
+            ELSE 
+                k := 0;
+                REPEAT 
+                    exitg1 := 0;
+                    IF k < 4 THEN 
+                        IF 120 = InST[INT_TO_DINT(b[k])] THEN 
+                            tf := TRUE;
+                            exitg1 := 1;
+                        ELSE 
+                            k := k + 1;
+                        END_IF;
+                    ELSE 
+                        exitg1 := 1;
+                    END_IF;
+                UNTIL NOT(exitg1 = 0)
+                END_REPEAT;
+                IF tf THEN 
+                    (* 'Utils:23' elseif ismember(QCcodes.UncertainProcess, InST(1:Num)) *)
+                    (* 'Utils:24' out = int16(QCcodes.UncertainProcess); *)
+                    out := 120;
+                ELSE 
+                    k := 0;
+                    REPEAT 
+                        exitg1 := 0;
+                        IF k < 4 THEN 
+                            IF 164 = InST[INT_TO_DINT(b[k])] THEN 
+                                tf := TRUE;
+                                exitg1 := 1;
+                            ELSE 
+                                k := k + 1;
+                            END_IF;
+                        ELSE 
+                            exitg1 := 1;
+                        END_IF;
+                    UNTIL NOT(exitg1 = 0)
+                    END_REPEAT;
+                    IF tf THEN 
+                        (* 'Utils:26' elseif ismember(QCcodes.Maintenance, InST(1:Num)) *)
+                        (* 'Utils:27' out = int16(QCcodes.Maintenance); *)
+                        out := 164;
+                    ELSE 
+                        k := 0;
+                        REPEAT 
+                            exitg1 := 0;
+                            IF k < 4 THEN 
+                                IF 128 = InST[INT_TO_DINT(b[k])] THEN 
+                                    tf := TRUE;
+                                    exitg1 := 1;
+                                ELSE 
+                                    k := k + 1;
+                                END_IF;
+                            ELSE 
+                                exitg1 := 1;
+                            END_IF;
+                        UNTIL NOT(exitg1 = 0)
+                        END_REPEAT;
+                        IF tf THEN 
+                            (* 'Utils:29' elseif ismember(QCcodes.Good, InST(1:Num)) *)
+                            (* 'Utils:30' out = int16(QCcodes.Good); *)
+                            out := 128;
+                        ELSE 
+                            (* 'Utils:203' out = int16(QCcodes.Bad); *)
+                            out := 0;
+                        END_IF;
+                    END_IF;
+                END_IF;
+            END_IF;
+        END_IF;
+    END_IF;
+END_IF;
+END_FUNCTION_BLOCK
+FUNCTION_BLOCK Utils_SelST16
+VAR_INPUT
+    InST: ARRAY [0..15] OF INT;
+END_VAR
+VAR_OUTPUT
+    out: INT;
+END_VAR
+VAR
+    b: ARRAY [0..1] OF INT := [0,1];
+    tf: BOOL;
+    k: DINT;
+    exitg1: DINT;
+END_VAR
+(* 'Utils:4' if Num < 1 || Num > 16 *)
+(* 'Utils:9' switch SelPrio *)
+(* 'Utils:10' case 0 *)
+(* 'Utils:11' if ismember(QCcodes.Simulation, InST(1:Num)) *)
+tf := FALSE;
+k := 0;
+REPEAT 
+    exitg1 := 0;
+    IF k < 2 THEN 
+        IF 96 = InST[INT_TO_DINT(b[k])] THEN 
+            tf := TRUE;
+            exitg1 := 1;
+        ELSE 
+            k := k + 1;
+        END_IF;
+    ELSE 
+        exitg1 := 1;
+    END_IF;
+UNTIL NOT(exitg1 = 0)
+END_REPEAT;
+IF tf THEN 
+    (* 'Utils:12' out = int16(QCcodes.Simulation); *)
+    out := 96;
+ELSE 
+    k := 0;
+    REPEAT 
+        exitg1 := 0;
+        IF k < 2 THEN 
+            IF 0 = InST[INT_TO_DINT(b[k])] THEN 
+                tf := TRUE;
+                exitg1 := 1;
+            ELSE 
+                k := k + 1;
+            END_IF;
+        ELSE 
+            exitg1 := 1;
+        END_IF;
+    UNTIL NOT(exitg1 = 0)
+    END_REPEAT;
+    IF tf THEN 
+        (* 'Utils:14' elseif ismember(QCcodes.Bad, InST(1:Num)) *)
+        (* 'Utils:15' out = int16(QCcodes.Bad); *)
+        out := 0;
+    ELSE 
+        k := 0;
+        REPEAT 
+            exitg1 := 0;
+            IF k < 2 THEN 
+                IF 40 = InST[INT_TO_DINT(b[k])] THEN 
+                    tf := TRUE;
+                    exitg1 := 1;
+                ELSE 
+                    k := k + 1;
+                END_IF;
+            ELSE 
+                exitg1 := 1;
+            END_IF;
+        UNTIL NOT(exitg1 = 0)
+        END_REPEAT;
+        IF tf THEN 
+            (* 'Utils:17' elseif ismember(QCcodes.BadProcess, InST(1:Num)) *)
+            (* 'Utils:18' out = int16(QCcodes.BadProcess); *)
+            out := 40;
+        ELSE 
+            k := 0;
+            REPEAT 
+                exitg1 := 0;
+                IF k < 2 THEN 
+                    IF 104 = InST[INT_TO_DINT(b[k])] THEN 
+                        tf := TRUE;
+                        exitg1 := 1;
+                    ELSE 
+                        k := k + 1;
+                    END_IF;
+                ELSE 
+                    exitg1 := 1;
+                END_IF;
+            UNTIL NOT(exitg1 = 0)
+            END_REPEAT;
+            IF tf THEN 
+                (* 'Utils:20' elseif ismember(QCcodes.Uncertain, InST(1:Num)) *)
+                (* 'Utils:21' out = int16(QCcodes.Uncertain); *)
+                out := 104;
+            ELSE 
+                k := 0;
+                REPEAT 
+                    exitg1 := 0;
+                    IF k < 2 THEN 
+                        IF 120 = InST[INT_TO_DINT(b[k])] THEN 
+                            tf := TRUE;
+                            exitg1 := 1;
+                        ELSE 
+                            k := k + 1;
+                        END_IF;
+                    ELSE 
+                        exitg1 := 1;
+                    END_IF;
+                UNTIL NOT(exitg1 = 0)
+                END_REPEAT;
+                IF tf THEN 
+                    (* 'Utils:23' elseif ismember(QCcodes.UncertainProcess, InST(1:Num)) *)
+                    (* 'Utils:24' out = int16(QCcodes.UncertainProcess); *)
+                    out := 120;
+                ELSE 
+                    k := 0;
+                    REPEAT 
+                        exitg1 := 0;
+                        IF k < 2 THEN 
+                            IF 164 = InST[INT_TO_DINT(b[k])] THEN 
+                                tf := TRUE;
+                                exitg1 := 1;
+                            ELSE 
+                                k := k + 1;
+                            END_IF;
+                        ELSE 
+                            exitg1 := 1;
+                        END_IF;
+                    UNTIL NOT(exitg1 = 0)
+                    END_REPEAT;
+                    IF tf THEN 
+                        (* 'Utils:26' elseif ismember(QCcodes.Maintenance, InST(1:Num)) *)
+                        (* 'Utils:27' out = int16(QCcodes.Maintenance); *)
+                        out := 164;
+                    ELSE 
+                        k := 0;
+                        REPEAT 
+                            exitg1 := 0;
+                            IF k < 2 THEN 
+                                IF 128 = InST[INT_TO_DINT(b[k])] THEN 
+                                    tf := TRUE;
+                                    exitg1 := 1;
+                                ELSE 
+                                    k := k + 1;
+                                END_IF;
+                            ELSE 
+                                exitg1 := 1;
+                            END_IF;
+                        UNTIL NOT(exitg1 = 0)
+                        END_REPEAT;
+                        IF tf THEN 
+                            (* 'Utils:29' elseif ismember(QCcodes.Good, InST(1:Num)) *)
+                            (* 'Utils:30' out = int16(QCcodes.Good); *)
+                            out := 128;
+                        ELSE 
+                            (* 'Utils:203' out = int16(QCcodes.Bad); *)
+                            out := 0;
+                        END_IF;
+                    END_IF;
+                END_IF;
+            END_IF;
+        END_IF;
+    END_IF;
+END_IF;
+END_FUNCTION_BLOCK
+FUNCTION_BLOCK Utils_SelST16_l0
+VAR_INPUT
+    InST: ARRAY [0..15] OF INT;
+END_VAR
+VAR_OUTPUT
+    out: INT;
+END_VAR
+VAR
+    b: ARRAY [0..2] OF INT := [0,1,2];
+    tf: BOOL;
+    k: DINT;
+    exitg1: DINT;
+END_VAR
+(* 'Utils:4' if Num < 1 || Num > 16 *)
+(* 'Utils:9' switch SelPrio *)
+(* 'Utils:10' case 0 *)
+(* 'Utils:11' if ismember(QCcodes.Simulation, InST(1:Num)) *)
+tf := FALSE;
+k := 0;
+REPEAT 
+    exitg1 := 0;
+    IF k < 3 THEN 
+        IF 96 = InST[INT_TO_DINT(b[k])] THEN 
+            tf := TRUE;
+            exitg1 := 1;
+        ELSE 
+            k := k + 1;
+        END_IF;
+    ELSE 
+        exitg1 := 1;
+    END_IF;
+UNTIL NOT(exitg1 = 0)
+END_REPEAT;
+IF tf THEN 
+    (* 'Utils:12' out = int16(QCcodes.Simulation); *)
+    out := 96;
+ELSE 
+    k := 0;
+    REPEAT 
+        exitg1 := 0;
+        IF k < 3 THEN 
+            IF 0 = InST[INT_TO_DINT(b[k])] THEN 
+                tf := TRUE;
+                exitg1 := 1;
+            ELSE 
+                k := k + 1;
+            END_IF;
+        ELSE 
+            exitg1 := 1;
+        END_IF;
+    UNTIL NOT(exitg1 = 0)
+    END_REPEAT;
+    IF tf THEN 
+        (* 'Utils:14' elseif ismember(QCcodes.Bad, InST(1:Num)) *)
+        (* 'Utils:15' out = int16(QCcodes.Bad); *)
+        out := 0;
+    ELSE 
+        k := 0;
+        REPEAT 
+            exitg1 := 0;
+            IF k < 3 THEN 
+                IF 40 = InST[INT_TO_DINT(b[k])] THEN 
+                    tf := TRUE;
+                    exitg1 := 1;
+                ELSE 
+                    k := k + 1;
+                END_IF;
+            ELSE 
+                exitg1 := 1;
+            END_IF;
+        UNTIL NOT(exitg1 = 0)
+        END_REPEAT;
+        IF tf THEN 
+            (* 'Utils:17' elseif ismember(QCcodes.BadProcess, InST(1:Num)) *)
+            (* 'Utils:18' out = int16(QCcodes.BadProcess); *)
+            out := 40;
+        ELSE 
+            k := 0;
+            REPEAT 
+                exitg1 := 0;
+                IF k < 3 THEN 
+                    IF 104 = InST[INT_TO_DINT(b[k])] THEN 
+                        tf := TRUE;
+                        exitg1 := 1;
+                    ELSE 
+                        k := k + 1;
+                    END_IF;
+                ELSE 
+                    exitg1 := 1;
+                END_IF;
+            UNTIL NOT(exitg1 = 0)
+            END_REPEAT;
+            IF tf THEN 
+                (* 'Utils:20' elseif ismember(QCcodes.Uncertain, InST(1:Num)) *)
+                (* 'Utils:21' out = int16(QCcodes.Uncertain); *)
+                out := 104;
+            ELSE 
+                k := 0;
+                REPEAT 
+                    exitg1 := 0;
+                    IF k < 3 THEN 
+                        IF 120 = InST[INT_TO_DINT(b[k])] THEN 
+                            tf := TRUE;
+                            exitg1 := 1;
+                        ELSE 
+                            k := k + 1;
+                        END_IF;
+                    ELSE 
+                        exitg1 := 1;
+                    END_IF;
+                UNTIL NOT(exitg1 = 0)
+                END_REPEAT;
+                IF tf THEN 
+                    (* 'Utils:23' elseif ismember(QCcodes.UncertainProcess, InST(1:Num)) *)
+                    (* 'Utils:24' out = int16(QCcodes.UncertainProcess); *)
+                    out := 120;
+                ELSE 
+                    k := 0;
+                    REPEAT 
+                        exitg1 := 0;
+                        IF k < 3 THEN 
+                            IF 164 = InST[INT_TO_DINT(b[k])] THEN 
+                                tf := TRUE;
+                                exitg1 := 1;
+                            ELSE 
+                                k := k + 1;
+                            END_IF;
+                        ELSE 
+                            exitg1 := 1;
+                        END_IF;
+                    UNTIL NOT(exitg1 = 0)
+                    END_REPEAT;
+                    IF tf THEN 
+                        (* 'Utils:26' elseif ismember(QCcodes.Maintenance, InST(1:Num)) *)
+                        (* 'Utils:27' out = int16(QCcodes.Maintenance); *)
+                        out := 164;
+                    ELSE 
+                        k := 0;
+                        REPEAT 
+                            exitg1 := 0;
+                            IF k < 3 THEN 
+                                IF 128 = InST[INT_TO_DINT(b[k])] THEN 
+                                    tf := TRUE;
+                                    exitg1 := 1;
+                                ELSE 
+                                    k := k + 1;
+                                END_IF;
+                            ELSE 
+                                exitg1 := 1;
+                            END_IF;
+                        UNTIL NOT(exitg1 = 0)
+                        END_REPEAT;
+                        IF tf THEN 
+                            (* 'Utils:29' elseif ismember(QCcodes.Good, InST(1:Num)) *)
+                            (* 'Utils:30' out = int16(QCcodes.Good); *)
+                            out := 128;
+                        ELSE 
+                            (* 'Utils:203' out = int16(QCcodes.Bad); *)
+                            out := 0;
+                        END_IF;
+                    END_IF;
+                END_IF;
+            END_IF;
+        END_IF;
+    END_IF;
+END_IF;
+END_FUNCTION_BLOCK
+FUNCTION_BLOCK PumpMon1
+VAR_INPUT
+    ssMethodType: INT;
+    PoRate: REAL;
+    ConvAct: BOOL;
+    ConstSpd: BOOL;
+    PoMech: AnaVal;
+    PoMechFact: REAL;
+    PoMechOffs: REAL;
+    PolyAct: BOOL;
+    PoElec: AnaVal;
+    PoElecFact: REAL;
+    PoElecOffs: REAL;
+    PolyDataK0: REAL;
+    PolyDataK1: REAL;
+    PolyDataK2: REAL;
+    PolyDataK3: REAL;
+    PolyDataK4: REAL;
+    Eta: REAL;
+    SlipCorr: BOOL;
+    LineFreq: REAL;
+    PolePairs: REAL;
+    SpdRate: REAL;
+    Spd: AnaVal;
+    SpdFact: REAL;
+    SpdOffs: REAL;
+    PoMechCorr: REAL;
+    Bypass: BOOL;
+    Flow1: REAL;
+    Flow2: REAL;
+    Flow3: REAL;
+    Flow4: REAL;
+    Flow5: REAL;
+    Flow6: REAL;
+    Flow7: REAL;
+    Flow8: REAL;
+    Flow9: REAL;
+    Flow10: REAL;
+    Flow11: REAL;
+    Flow12: REAL;
+    Flow13: REAL;
+    Flow14: REAL;
+    Flow15: REAL;
+    FlowFact: REAL;
+    FlowOffs: REAL;
+    TimeBase: REAL;
+    Flow: AnaVal;
+    Power1: REAL;
+    Power2: REAL;
+    Power3: REAL;
+    Power4: REAL;
+    Power5: REAL;
+    Power6: REAL;
+    Power7: REAL;
+    Power8: REAL;
+    Power9: REAL;
+    Power10: REAL;
+    Power11: REAL;
+    Power12: REAL;
+    Power13: REAL;
+    Power14: REAL;
+    Power15: REAL;
+    Density: REAL;
+    P_Atmos: REAL;
+    P_In: AnaVal;
+    P_InFact: REAL;
+    P_InOffs: REAL;
+    P_Out: AnaVal;
+    P_OutFact: REAL;
+    P_OutOffs: REAL;
+    InSocket: REAL;
+    PresSocket: REAL;
+    DelHiCorr: REAL;
+    H_Geo: REAL;
+    PoHydrCorr: REAL;
+    EtaCorr: REAL;
+    Antoine: REAL;
+    AntA: REAL;
+    AntB: REAL;
+    AntC: REAL;
+    Temp: AnaVal;
+    TempFact: REAL;
+    TempOffs: REAL;
+    NpshCorr: REAL;
+    AntFact: REAL;
+    P_Vapor: REAL;
+    PowerTol: REAL;
+    PowerMax: REAL;
+    DelHiTol: REAL;
+    DelHi1: REAL;
+    DelHi2: REAL;
+    DelHi3: REAL;
+    DelHi4: REAL;
+    DelHi5: REAL;
+    DelHi6: REAL;
+    DelHi7: REAL;
+    DelHi8: REAL;
+    DelHi9: REAL;
+    DelHi10: REAL;
+    DelHi11: REAL;
+    DelHi12: REAL;
+    DelHi13: REAL;
+    DelHi14: REAL;
+    DelHi15: REAL;
+    DelHiMax: REAL;
+    Eta1: REAL;
+    Eta2: REAL;
+    Eta3: REAL;
+    Eta4: REAL;
+    Eta5: REAL;
+    Eta6: REAL;
+    Eta7: REAL;
+    Eta8: REAL;
+    Eta9: REAL;
+    Eta10: REAL;
+    Eta11: REAL;
+    Eta12: REAL;
+    Eta13: REAL;
+    Eta14: REAL;
+    Eta15: REAL;
+    EtaMax: REAL;
+    EtaTol: REAL;
+    FlowNp1: REAL;
+    FlowNp2: REAL;
+    FlowNp3: REAL;
+    FlowNp4: REAL;
+    FlowNp5: REAL;
+    FlowNp6: REAL;
+    FlowNp7: REAL;
+    FlowNp8: REAL;
+    FlowNp9: REAL;
+    FlowNp10: REAL;
+    FlowNp11: REAL;
+    FlowNp12: REAL;
+    FlowNp13: REAL;
+    FlowNp14: REAL;
+    FlowNp15: REAL;
+    Npsh1: REAL;
+    Npsh2: REAL;
+    Npsh3: REAL;
+    Npsh4: REAL;
+    Npsh5: REAL;
+    Npsh6: REAL;
+    Npsh7: REAL;
+    Npsh8: REAL;
+    Npsh9: REAL;
+    Npsh10: REAL;
+    Npsh11: REAL;
+    Npsh12: REAL;
+    Npsh13: REAL;
+    Npsh14: REAL;
+    Npsh15: REAL;
+    NpshMax: REAL;
+    NpshTol: REAL;
+    LoadRstOp: BOOL;
+    FlowMax: REAL;
+    SampleTime: REAL;
+    Running: DigVal;
+END_VAR
+VAR_OUTPUT
+    siPoMech: AnaVal;
+    siPoElec: AnaVal;
+    siSpd: AnaVal;
+    siFlow: AnaVal;
+    Flow_h: REAL;
+    siP_Out: AnaVal;
+    siP_In: AnaVal;
+    DelHi: AnaVal;
+    siPoHydr: AnaVal;
+    EtaOut: AnaVal;
+    siTemp: AnaVal;
+    siP_Vapor: REAL;
+    Npsh: AnaVal;
+    DevPower: REAL;
+    MinTolPower: REAL;
+    MaxTolPower: REAL;
+    RelPower: REAL;
+    DevDelHi: REAL;
+    MinTolDelHi: REAL;
+    MaxTolDelHi: REAL;
+    MaxTolEta: REAL;
+    MaxTolNpsh: REAL;
+    MinTolEta: REAL;
+    RelDelHi: REAL;
+    RelEta: REAL;
+    RelNpsh: REAL;
+    DevEta: REAL;
+    DevNpsh: REAL;
+    LoadTime: REAL;
+    Load0: REAL;
+    Load1: REAL;
+    Load2: REAL;
+    Load3: REAL;
+    Load4: REAL;
+    Load5: REAL;
+    Load6: REAL;
+    Load7: REAL;
+    Load8: REAL;
+    Load9: REAL;
+    Load10: REAL;
+    DevNpsh0: REAL;
+    DevNpsh1: REAL;
+    DevNpsh2: REAL;
+    DevNpsh3: REAL;
+    DevNpsh4: REAL;
+    DevNpsh5: REAL;
+    DevNpsh6: REAL;
+    DevNpsh7: REAL;
+    DevNpsh8: REAL;
+    DevNpsh9: REAL;
+    DevNpsh10: REAL;
+END_VAR
+VAR
+    rangeCntNpsh: ARRAY [0..11] OF REAL;
+    rangeCnt: ARRAY [0..11] OF REAL;
+    SrFlowMaxOld: REAL;
+    i0_Utils_SelST16: Utils_SelST16;
+    i0_Utils_SelST16_l: Utils_SelST16_l;
+    i0_Utils_SelST16_l0: Utils_SelST16_l0;
+    SlipCorr_0: BOOL;
+    curve: ARRAY [0..29] OF REAL;
+    A: REAL;
+    B: REAL;
+    b_temp: REAL;
+    stcInST: ARRAY [0..15] OF INT;
+    pos: DINT;
+    rTemp: REAL;
+    rSpeedFact: REAL;
+    SrCurvePoiPower: REAL;
+    rtb_siPoMech: AnaVal;
+    rtb_siPoElec: AnaVal;
+    rtb_siSpd: AnaVal;
+    rtb_siFlow: AnaVal;
+    rtb_siP_Out: AnaVal;
+    rtb_siP_In: AnaVal;
+    rtb_DelHi: AnaVal;
+    rtb_siPoHydr: AnaVal;
+    rtb_EtaOut: AnaVal;
+    rtb_siTemp: AnaVal;
+    rtb_Npsh: AnaVal;
+    b_i: DINT;
+    temp_tmp: REAL;
+    rTemp_tmp: REAL;
+    temp1: INT;
+END_VAR
+CASE ssMethodType OF
+    0: 
+        (* :  SrFlowMaxOld = 0.0; *)
+        SrFlowMaxOld := 0.0;
+        (* :  rangeCnt = zeros(1, 12); *)
+        (* :  rangeCntNpsh = zeros(1, 12); *)
+        FOR b_i := 0 TO 11 DO 
+            rangeCnt[b_i] := 0.0;
+            rangeCntNpsh[b_i] := 0.0;
+        END_FOR;
+    1: 
+        SlipCorr_0 := SlipCorr;
+        (* Интерфейс блока *)
+        (* { *)
+        (* <tia> *)
+        (* Antoine;        true;   1 = Antoine calculation is active *)
+        (* AntA;           8.07131;    A value of the Antoine equation *)
+        (* AntB;           1730.63;    B value of the Antoine equation *)
+        (* AntC;           233.426;    C value of the Antoine equation *)
+        (* AntFact;        0.0013332;  Normalization factor of the vapor pressure in bar *)
+        (* ConstSpd;       true;   1 = Motor is running at constant speed *)
+        (* ConvAct;        false;  1= Mechanical power is passed to PoMech *)
+        (* Bypass;         false;  1 = Bypass calculation is active *)
+        (* DelHi1;         0.0;    y value 1, delivery height [m] *)
+        (* DelHi2;         0.0;    y value 2, delivery height [m] *)
+        (* DelHi3;         126.0;  y value 3, delivery height [m] *)
+        (* DelHi4;         126.0;  y value 4, delivery height [m] *)
+        (* DelHi5;         125.5;  y value 5, delivery height [m] *)
+        (* DelHi6;         124.5;  y value 6, delivery height [m] *)
+        (* DelHi7;         123.0;  y value 7, delivery height [m] *)
+        (* DelHi8;         121.0;  y value 8, delivery height [m] *)
+        (* DelHi9;         118.0;  y value 9, delivery height [m] *)
+        (* DelHi10;        114.0;  y value 10, delivery height [m] *)
+        (* DelHi11;        109.0;  y value 11, delivery height [m] *)
+        (* DelHi12;        103.0;  y value 12, delivery height [m] *)
+        (* DelHi13;        96.0;   y value 13, delivery height [m] *)
+        (* DelHi14;        88.0;   y value 14, delivery height [m] *)
+        (* DelHi15;        79.0;   y value 15, delivery height [m] *)
+        (* DelHiCorr;      1.0;    Delivery height correction factor *)
+        (* DelHiMax;       140.0;  Maximum delivery height value [m] *)
+        (* DelHiTol;       3.0;    Tolerance for deviation from the delivery height characteristic [%] *)
+        (* Density;        1000.0; Density of the pumped medium [kg/m3] *)
+        (* Eta;            80.0;   Efficiency of the motor (cos ) [%] *)
+        (* Eta1;           0.0;    y value 1, efficiency [%] *)
+        (* Eta2;           0.0;    y value 2, efficiency [%] *)
+        (* Eta3;           33.0;   y value 3, efficiency [%] *)
+        (* Eta4;           41.0;   y value 4, efficiency [%] *)
+        (* Eta5;           48.5;   y value 5, efficiency [%] *)
+        (* Eta6;           54.5;   y value 6, efficiency [%] *)
+        (* Eta7;           60.0;   y value 7, efficiency [%] *)
+        (* Eta8;           64.5;   y value 8, efficiency [%] *)
+        (* Eta9;           68.0;   y value 9, efficiency [%] *)
+        (* Eta10;          70.5;   y value 10, efficiency [%] *)
+        (* Eta11;          71.5;   y value 11, efficiency [%] *)
+        (* Eta12;          71.5;   y value 12, efficiency [%] *)
+        (* Eta13;          70.0;   y value 13, efficiency [%] *)
+        (* Eta14;          67.0;   y value 14, efficiency [%] *)
+        (* Eta15;          63.0;   y value 15, efficiency [%] *)
+        (* EtaCorr;        1.0;    Efficiency correction factor *)
+        (* EtaMax;         100.0;  Maximum value of efficiency [%] *)
+        (* EtaTol;         3.0;    Tolerance for deviation from the efficiency characteristic [%] *)
+        (* Flow;           ;       Interconnectable process value for the flow rate *)
+        (* Flow1;          100.0;  x value 1, flow [m3/h] *)
+        (* Flow2;          200.0;  x value 2, flow [m3/h] *)
+        (* Flow3;          300.0;  x value 3, flow [m3/h] *)
+        (* Flow4;          400.0;  x value 4, flow [m3/h] *)
+        (* Flow5;          500.0;  x value 5, flow [m3/h] *)
+        (* Flow6;          600.0;  x value 6, flow [m3/h] *)
+        (* Flow7;          700.0;  x value 7, flow [m3/h] *)
+        (* Flow8;          800.0;  x value 8, flow [m3/h] *)
+        (* Flow9;          900.0;  x value 9, flow [m3/h] *)
+        (* Flow10;         1000.0;  x value 10, flow [m3/h] *)
+        (* Flow11;         1100.0;  x value 11, flow [m3/h] *)
+        (* Flow12;         1200.0;  x value 12, flow [m3/h] *)
+        (* Flow13;         1300.0;  x value 13, flow [m3/h] *)
+        (* Flow14;         1400.0;  x value 14, flow [m3/h] *)
+        (* Flow15;         1500.0;  x value 15, flow [m3/h] *)
+        (* FlowFact;       2.7777e-4;  Normalization factor for the flow rate in m3/s *)
+        (* FlowMax;        1500.0; Maximum value of the flow rate [m3/h] *)
+        (* FlowNp1;        100.0;  x value 1, NPSH flow [m3/h] *)
+        (* FlowNp2;        200.0;  x value 2, NPSH flow [m3/h] *)
+        (* FlowNp3;        300.0;  x value 3, NPSH flow [m3/h] *)
+        (* FlowNp4;        400.0;  x value 4, NPSH flow [m3/h] *)
+        (* FlowNp5;        500.0;  x value 5, NPSH flow [m3/h] *)
+        (* FlowNp6;        600.0;  x value 6, NPSH flow [m3/h] *)
+        (* FlowNp7;        700.0;  x value 7, NPSH flow [m3/h] *)
+        (* FlowNp8;        800.0;  x value 8, NPSH flow [m3/h] *)
+        (* FlowNp9;        900.0;  x value 9, NPSH flow [m3/h] *)
+        (* FlowNp10;       1000.0;  x value 10, NPSH flow [m3/h] *)
+        (* FlowNp11;       1100.0;  x value 11, NPSH flow [m3/h] *)
+        (* FlowNp12;       1200.0;  x value 12, NPSH flow [m3/h] *)
+        (* FlowNp13;       1300.0;  x value 13, NPSH flow [m3/h] *)
+        (* FlowNp14;       1400.0;  x value 14, NPSH flow [m3/h] *)
+        (* FlowNp15;       1500.0;  x value 15, NPSH flow [m3/h] *)
+        (* FlowOffs;       0.0;    Normalization offset of the flow rate in m3/s *)
+        (* H_Geo;          0.0;    Geometric delivery height in [m]. Provides the difference in height between the intake and discharge stubs. *)
+        (* InSocket;       300.0;  Discharge stub diameter [mm] *)
+        (* LineFreq;       50.0;   Line frequency [Hz]. Required for slip correction. *)
+        (* LoadRstOp;      false;  1 = Reset histogram data *)
+        (* Npsh1;          0.0;    y value 1, NPSH [m] *)
+        (* Npsh2;          0.0;    y value 2, NPSH [m] *)
+        (* Npsh3;          0.95;   y value 3, NPSH [m] *)
+        (* Npsh4;          1.0;    y value 4, NPSH [m] *)
+        (* Npsh5;          1.07;   y value 5, NPSH [m] *)
+        (* Npsh6;          1.17;   y value 6, NPSH [m] *)
+        (* Npsh7;          1.29;   y value 7, NPSH [m] *)
+        (* Npsh8;          1.44;   y value 8, NPSH [m] *)
+        (* Npsh9;          1.62;   y value 9, NPSH [m] *)
+        (* Npsh10;         1.83;   y value 10, NPSH [m] *)
+        (* Npsh11;         2.07;   y value 11, NPSH [m] *)
+        (* Npsh12;         2.34;   y value 12, NPSH [m] *)
+        (* Npsh13;         2.64;   y value 13, NPSH [m] *)
+        (* Npsh14;         2.96;   y value 14, NPSH [m] *)
+        (* Npsh15;         3.3;    y value 15, NPSH [m] *)
+        (* NpshCorr;       1.0;    NPSH correction factor *)
+        (* NpshMax;        3.5;    Maximum value of NPSH [m] *)
+        (* NpshTol;        0.5;    Tolerance for deviation from the NPSH characteristic [m] *)
+        (* P_Atmos;        1.0;    Air pressure [bar] *)
+        (* P_In;           ;       Interconnectable process value of the intake pressure *)
+        (* P_InFact;       1.0;    Normalization factor of the intake pressure in bar *)
+        (* P_InOffs;       0.0;    Normalization offset of the intake pressure in bar *)
+        (* P_Out;          ;       Interconnectable process value of the flow pressure *)
+        (* P_OutFact;      1.0;    Normalization factor of the flow pressure in bar *)
+        (* P_OutOffs;      0.0;    Normalization offset of the flow pressure in bar *)
+        (* P_Vapor;        0.0;    Vapor pressure of the pumped medium [bar] *)
+        (* PolePairs;      1.0;    Number of motor pole pairs for slip correction *)
+        (* PolyAct;        false;  1 = Polynomial calculation active *)
+        (* PolyDataK0;     0.0;    Polynomial coefficient *)
+        (* PolyDataK1;     0.0;    Polynomial coefficient *)
+        (* PolyDataK2;     0.0;    Polynomial coefficient *)
+        (* PolyDataK3;     0.0;    Polynomial coefficient *)
+        (* PolyDataK4;     0.0;    Polynomial coefficient *)
+        (* PoElec;         ;       Interconnectable process value of the electrical power *)
+        (* PoElecFact;     1.0;    Normalization factor of the electrical power in kW *)
+        (* PoElecOffs;     0.0;    Normalization offset of the electrical power in kW *)
+        (* PoMech;         ;       Interconnectable process value of the mechanical power (e.g. from converter) *)
+        (* PoMechCorr;     1.0;    Mechanical power correction factor *)
+        (* PoMechFact;     1.0;    Mechanical power normalization factor in kW *)
+        (* PoMechOffs;     0.0;    Normalization offset of mechanical power in kW *)
+        (* PoRate;         100.0;  Rated power of the motor [kW];                      EW_RET_EV *)
+        (* PoHydrCorr;     1.0;    Hydraulic power correction factor *)
+        (* Power1;         0.0;    y value 1, power [kW] *)
+        (* Power2;         0.0;    y value 2, power [kW] *)
+        (* Power3;         318.0;  y value 3, power [kW] *)
+        (* Power4;         339.0;  y value 4, power [kW] *)
+        (* Power5;         360.0;  y value 5, power [kW] *)
+        (* Power6;         380.0;  y value 6, power [kW] *)
+        (* Power7;         399.0;  y value 7, power [kW] *)
+        (* Power8;         417.0;  y value 8, power [kW] *)
+        (* Power9;         434.0;  y value 9, power [kW] *)
+        (* Power10;        450.0;  y value 10, power [kW] *)
+        (* Power11;        465.0;  y value 11, power [kW] *)
+        (* Power12;        480.0;  y value 12, power [kW] *)
+        (* Power13;        495.0;  y value 13, power [kW] *)
+        (* Power14;        509.0;  y value 14, power [kW] *)
+        (* Power15;        522.0;  y value 15, power [kW] *)
+        (* PowerMax;       600.0;  Maximum value of power [kW] *)
+        (* PowerTol;       3.0;    Tolerance for deviation from the power characteristic [%] *)
+        (* PresSocket;     300.0;  Discharge stub diameter [mm] *)
+        (* Running;        ;       1 = Motor is running *)
+        (* SampleTime;     0.1;    Sampling time [s] (assigned automatically) *)
+        (* SlipCorr;       false;  1 = Slip correction active *)
+        (* Spd;            ;       Interconnectable process value for the speed *)
+        (* SpdFact;        1.0 ;   Normalization factor of speed in rpm *)
+        (* SpdOffs;        0.0;    Normalization offset of speed in rpm *)
+        (* SpdRate;        2900.0; Rated speed [rpm] *)
+        (* Temp;           ;       Interconnectable process value for the temperature of the pumped medium *)
+        (* TempFact;       1.0;    Normalization factor of the medium temperature in °C *)
+        (* TempOffs;       0.0;    Normalization offset of the medium temperature in °C *)
+        (* TimeBase;       3600.0; Time basis for the flow values of the characteristic (3600 = hour) [s] *)
+        
+        (* DelHi;          ;       Output delivery height [m] *)
+        (* DevDelHi;       ;       Deviation from the delivery height characteristic curve [m] *)
+        (* DevEta;         ;       Deviation from the efficiency characteristic curve [%] *)
+        (* DevNpsh;        ;       Deviation from the NPSH characteristic curve [m] *)
+        (* DevNpsh0;       ;       Downtime for NPSH histogram (Not Running) [%] *)
+        (* DevNpsh1;       ;       Running time of the NPSH value in the range < -1 m [%] *)
+        (* DevNpsh2;       ;       Running time of the NPSH value in the range -1 to -0.5 m [%] *)
+        (* DevNpsh3;       ;       Running time of the NPSH value in the range -0.5 to 0 m [%] *)
+        (* DevNpsh4;       ;       Running time of the NPSH value in the range 0 to 0.5 m [%] *)
+        (* DevNpsh5;       ;       Running time of the NPSH value in the range 0.5 to 1 m [%] *)
+        (* DevNpsh6;       ;       Running time of the NPSH value in the range 1 to 1.5 m [%] *)
+        (* DevNpsh7;       ;       Running time of the NPSH value in the range 1.5 to 2 m [%] *)
+        (* DevNpsh8;       ;       Running time of the NPSH value in the range 2 to 2.5 m [%] *)
+        (* DevNpsh9;       ;       Running time of the NPSH value in the range 2.5 to 3.0 m [%] *)
+        (* DevNpsh10;      ;       Running time of the NPSH value in the range > 3.0 m [%] *)
+        (* DevPower;       ;       Deviation from the power characteristic [kW] *)
+        (* Flow_h;         ;       Normalized flow rate for display in the faceplate [m3/h] *)
+        (* EtaOut;         ;       Efficiency output [%] *)
+        (* Load0;          ;       Downtime for flow rate histogram (Not Running) [%] *)
+        (* Load1;          ;       Running time of the pump in the range 0-10% FlowMax [%] *)
+        (* Load2;          ;       Running time of the pump in the range 10-20% FlowMax [%] *)
+        (* Load3;          ;       Running time of the pump in the range 20-30% FlowMax [%] *)
+        (* Load4;          ;       Running time of the pump in the range 30-40% FlowMax [%] *)
+        (* Load5;          ;       Running time of the pump in the range 40-50% FlowMax [%] *)
+        (* Load6;          ;       Running time of the pump in the range 50-60% FlowMax [%] *)
+        (* Load7;          ;       Running time of the pump in the range 60-70% FlowMax [%] *)
+        (* Load8;          ;       Running time of the pump in the range 70-80% FlowMax [%] *)
+        (* Load9;          ;       Running time of the pump in the range 80-90% FlowMax [%] *)
+        (* Load10;         ;       Running time of the pump in the range 90-100% FlowMax [%] *)
+        (* LoadTime;       ;       Recording period of the histogram data [h] *)
+        (* MaxTolDelHi;    ;       Upper tolerance limit for deviation from the delivery height characteristic [m] *)
+        (* MaxTolEta;      ;       Upper tolerance limit for deviation from the efficiency characteristic [%] *)
+        (* MaxTolNpsh;     ;       Upper tolerance limit for approach to the NPSH characteristic [m] *)
+        (* MaxTolPower;    ;       Upper tolerance limit for deviation from the power characteristic [kW] *)
+        (* MinTolDelHi;    ;       Lower tolerance limit for deviation from the delivery height characteristic [m] *)
+        (* MinTolEta;      ;       Lower tolerance limit for deviation from the efficiency characteristic [%] *)
+        (* MinTolPower;    ;       Lower tolerance limit for deviation from the power characteristic [kW] *)
+        (* Npsh;           ;       NPSH value output [m] *)
+        (* RelDelHi;       ;       Relative deviation from the delivery height characteristic [%] *)
+        (* RelEta;         ;       Relative deviation from the efficiency characteristic [%] *)
+        (* RelNpsh;        ;       Relative deviation from the NPSH characteristic [%] *)
+        (* RelPower;       ;       Relative deviation from the power characteristic [%] *)
+        (* siFlow;         ;       Normalized flow rate output [m3/h] *)
+        (* siP_In;         ;       Normalized intake pressure output [bar] *)
+        (* siP_Out;        ;       Normalized flow pressure output [bar] *)
+        (* siP_Vapor;      ;       Vapor pressure of the pumped medium output [bar] *)
+        (* siPoElec;       ;       Normalized electrical power output [kW] *)
+        (* siPoHydr;       ;       Normalized hydraulic power output [kW] *)
+        (* siSpd;          ;       Normalized speed output [rpm] *)
+        (* siTemp;         ;       Normalized temperature output [°C] *)
+        (* </tia> *)
+        (* } *)
+        (* :  if isempty(SrFlowMaxOld) *)
+        (* :  if isempty(rangeCnt) *)
+        (* :  if isempty(rangeCntNpsh) *)
+        (* :  curve = zeros(15, 2); *)
+        FOR b_i := 0 TO 29 DO 
+            curve[b_i] := 0.0;
+        END_FOR;
+        (* Перевод в СИ *)
+        (* :  siFlow.Value = FlowFact * Flow.Value + FlowOffs; *)
+        rtb_siFlow.Value := (FlowFact * Flow.Value) + FlowOffs;
+        (* :  siFlow.QC = Flow.QC; *)
+        rtb_siFlow.QC := Flow.QC;
+        (* :  Flow_h = siFlow.Value * TimeBase; *)
+        Flow_h := rtb_siFlow.Value * TimeBase;
+        (* :  siP_In.Value = P_Atmos + P_InOffs + P_InFact * P_In.Value; *)
+        rtb_siP_In.Value := (P_Atmos + P_InOffs) + (P_InFact * P_In.Value);
+        (* :  siP_In.QC = P_In.QC; *)
+        rtb_siP_In.QC := P_In.QC;
+        (* :  siP_Out.Value = P_Atmos + P_OutOffs + P_OutFact * P_Out.Value; *)
+        rtb_siP_Out.Value := (P_Atmos + P_OutOffs) + (P_OutFact * P_Out.Value);
+        (* :  siP_Out.QC = P_Out.QC; *)
+        rtb_siP_Out.QC := P_Out.QC;
+        (* :  siPoElec.Value = PoElecFact * PoElec.Value + PoElecOffs; *)
+        rtb_siPoElec.Value := (PoElecFact * PoElec.Value) + PoElecOffs;
+        (* :  siPoElec.QC = PoElec.QC; *)
+        rtb_siPoElec.QC := PoElec.QC;
+        (* :  siSpd.Value = SpdFact * Spd.Value + SpdOffs; *)
+        rtb_siSpd.Value := (SpdFact * Spd.Value) + SpdOffs;
+        (* :  siSpd.QC = Spd.QC; *)
+        rtb_siSpd.QC := Spd.QC;
+        (* :  siTemp.Value = TempFact * Temp.Value + TempOffs; *)
+        rtb_siTemp.Value := (TempFact * Temp.Value) + TempOffs;
+        (* :  siTemp.QC = Temp.QC; *)
+        rtb_siTemp.QC := Temp.QC;
+        (* Расчет механической мощности *)
+        (* :  if PoRate <= 0 *)
+        IF PoRate <= 0.0 THEN 
+            (* неправильна задана номинальная мощность двигателя *)
+            (* :  rPoMech = 0.0; *)
+            A := 0.0;
+        ELSIF ConvAct THEN 
+            (* :  elseif ConvAct *)
+            (* есть измеренное значение механической мощности (из частотного привода) *)
+            (* :  rPoMech = PoMechFact * PoMech.Value + PoMechOffs; *)
+            A := (PoMechFact * PoMech.Value) + PoMechOffs;
+        ELSIF PolyAct THEN 
+            (* :  elseif PolyAct *)
+            (* есть зависимость между мех. и электр. мощностью в виде полинома *)
+            (* :  rPoMech = PolyDataK1 * siPoElec.Value + PolyDataK0; *)
+            (* :  rPoMech = PolyDataK2 * siPoElec.Value * siPoElec.Value + rPoMech; *)
+            (* :  rPoMech = PolyDataK3 * siPoElec.Value * siPoElec.Value * siPoElec.Value + rPoMech; *)
+            (* :  rPoMech = PolyDataK4 * siPoElec.Value * siPoElec.Value * siPoElec.Value * siPoElec.Value + rPoMech; *)
+            A := ((((PolyDataK4 * rtb_siPoElec.Value) * rtb_siPoElec.Value) * rtb_siPoElec.Value) * rtb_siPoElec.Value) + ((((PolyDataK3 * rtb_siPoElec.Value)
+                 * rtb_siPoElec.Value) * rtb_siPoElec.Value) + (((PolyDataK2 * rtb_siPoElec.Value) * rtb_siPoElec.Value) + ((PolyDataK1 * rtb_siPoElec.Value)
+                 + PolyDataK0)));
+        ELSE 
+            (* :  else *)
+            (* расчет по модели двигателя *)
+            (* :  A_0 = 1.1788; *)
+            (* :  A_1 = -0.01208; *)
+            (* :  A_2 = 0; *)
+            (* :  B_0 = 0.49573; *)
+            (* :  B_1 = 0.00517; *)
+            (* :  B_2 = 0; *)
+            (* :  C_0 = 2.2034; *)
+            (* :  C_1 = -0.04223; *)
+            (* :  C_2 = 0.000204; *)
+            (* :  A = A_1 * Eta + A_0 + A_2 * Eta * Eta; *)
+            A := (-0.01208 * Eta) + 1.1788;
+            (* :  B = B_1 * Eta + B_0 + B_2 * Eta * Eta; *)
+            B := (0.00517 * Eta) + 0.49573;
+            (* :  C = C_1 * Eta + C_0 + C_2 * Eta * Eta; *)
+            (* :  D = C - siPoElec.Value / (abs(PoRate) + 1e-5); *)
+            (* :  temp = B * B - 4.0 * A * D; *)
+            b_temp := (B * B) - (((((-0.04223 * Eta) + 2.2034) + ((0.000204 * Eta) * Eta)) - (rtb_siPoElec.Value / (PoRate + 1.0E-5)
+                )) * (4.0 * A));
+            (* :  if temp >= 0.0 && Eta > 30 && Eta <= 100 *)
+            IF ((b_temp >= 0.0) AND (Eta > 30.0)) AND (Eta <= 100.0) THEN 
+                (* :  rPoMech = ((-B + sqrt(temp)) * PoRate) / (2 * A + 1e-5); *)
+                A := ((( -B) + SQRT(b_temp)) * PoRate) / ((2.0 * A) + 1.0E-5);
+            ELSE 
+                (* :  else *)
+                (* :  rPoMech = -1.0; *)
+                A := -1.0;
+            END_IF;
+        END_IF;
+        (* Компенсация скольжения *)
+        (* :  if ConstSpd *)
+        IF ConstSpd THEN 
+            (* :  SlipCorr = false; *)
+            SlipCorr_0 := FALSE;
+        END_IF;
+        (* :  if SlipCorr *)
+        IF SlipCorr_0 THEN 
+            (* :  rTheoreticSpd = LineFreq * 60 / PolePairs; *)
+            B := (LineFreq * 60.0) / PolePairs;
+            (* :  rSlip = 1 - ((rTheoreticSpd - SpdRate) / rTheoreticSpd) * (rPoMech / PoRate); *)
+            B := 1.0 - (((B - SpdRate) / B) * (A / PoRate));
+            (* :  siSpd.Value = rSlip * siSpd.Value; *)
+            rtb_siSpd.Value := B * rtb_siSpd.Value;
+            (* :  rPoMech = rPoMech * rSlip; *)
+            A := A * B;
+        END_IF;
+        (* Расчет siPoMech *)
+        (* :  siPoMech.Value = rPoMech * PoMechCorr; *)
+        rtb_siPoMech.Value := A * PoMechCorr;
+        (* :  if siPoMech.Value < 0.0 || rPoMech < 0.0 *)
+        IF (rtb_siPoMech.Value < 0.0) OR (A < 0.0) THEN 
+            (* :  siPoMech.Value = 0.0; *)
+            rtb_siPoMech.Value := 0.0;
+        END_IF;
+        (* :  stcInST = zeros(1, 16, 'int16'); *)
+        FOR b_i := 0 TO 15 DO 
+            stcInST[b_i] := 0;
+        END_FOR;
+        (* :  if ConvAct *)
+        IF ConvAct THEN 
+            (* :  stcInST(1) = PoMech.QC; *)
+            stcInST[0] := PoMech.QC;
+        ELSE 
+            (* :  else *)
+            (* :  stcInST(1) = PoElec.QC; *)
+            stcInST[0] := PoElec.QC;
+        END_IF;
+        (* :  if ~ConstSpd *)
+        IF  NOT ConstSpd THEN 
+            (* :  stcInST(2) = Spd.QC; *)
+            stcInST[1] := Spd.QC;
+        ELSE 
+            (* :  else *)
+            (* :  stcInST(2) = int16(QCcodes.Good); *)
+            stcInST[1] := 128;
+        END_IF;
+        (* stcInST(3) = siPoMech.QC;     !!! *)
+        (* :  siPoMech.QC = Utils.SelST16(stcInST, 2, 0); *)
+        i0_Utils_SelST16(InST := stcInST);
+        rtb_siPoMech.QC := i0_Utils_SelST16.out;
+        (* Байпас насоса *)
+        (* Расчитываем поток не по датчику, а по мех. мощности *)
+        (* :  if Bypass *)
+        IF Bypass THEN 
+            (* :  curve(1, 1) = Flow1; *)
+            curve[0] := Flow1;
+            (* :  curve(2, 1) = Flow2; *)
+            curve[1] := Flow2;
+            (* :  curve(3, 1) = Flow3; *)
+            curve[2] := Flow3;
+            (* :  curve(4, 1) = Flow4; *)
+            curve[3] := Flow4;
+            (* :  curve(5, 1) = Flow5; *)
+            curve[4] := Flow5;
+            (* :  curve(6, 1) = Flow6; *)
+            curve[5] := Flow6;
+            (* :  curve(7, 1) = Flow7; *)
+            curve[6] := Flow7;
+            (* :  curve(8, 1) = Flow8; *)
+            curve[7] := Flow8;
+            (* :  curve(9, 1) = Flow9; *)
+            curve[8] := Flow9;
+            (* :  curve(10, 1) = Flow10; *)
+            curve[9] := Flow10;
+            (* :  curve(11, 1) = Flow11; *)
+            curve[10] := Flow11;
+            (* :  curve(12, 1) = Flow12; *)
+            curve[11] := Flow12;
+            (* :  curve(13, 1) = Flow13; *)
+            curve[12] := Flow13;
+            (* :  curve(14, 1) = Flow14; *)
+            curve[13] := Flow14;
+            (* :  curve(15, 1) = Flow15; *)
+            curve[14] := Flow15;
+            (* :  curve(1, 2) = Power1; *)
+            curve[15] := Power1;
+            (* :  curve(2, 2) = Power2; *)
+            curve[16] := Power2;
+            (* :  curve(3, 2) = Power3; *)
+            curve[17] := Power3;
+            (* :  curve(4, 2) = Power4; *)
+            curve[18] := Power4;
+            (* :  curve(5, 2) = Power5; *)
+            curve[19] := Power5;
+            (* :  curve(6, 2) = Power6; *)
+            curve[20] := Power6;
+            (* :  curve(7, 2) = Power7; *)
+            curve[21] := Power7;
+            (* :  curve(8, 2) = Power8; *)
+            curve[22] := Power8;
+            (* :  curve(9, 2) = Power9; *)
+            curve[23] := Power9;
+            (* :  curve(10, 2) = Power10; *)
+            curve[24] := Power10;
+            (* :  curve(11, 2) = Power11; *)
+            curve[25] := Power11;
+            (* :  curve(12, 2) = Power12; *)
+            curve[26] := Power12;
+            (* :  curve(13, 2) = Power13; *)
+            curve[27] := Power13;
+            (* :  curve(14, 2) = Power14; *)
+            curve[28] := Power14;
+            (* :  curve(15, 2) = Power15; *)
+            curve[29] := Power15;
+            (* :  pos = 1; *)
+            pos := 0;
+            (* :  for i = 1:15 *)
+            FOR b_i := 0 TO 14 DO 
+                (* :  if siPoMech.Value >= curve(i, 2) *)
+                IF rtb_siPoMech.Value >= curve[15 + b_i] THEN 
+                    (* :  pos = i; *)
+                    pos := b_i;
+                END_IF;
+            END_FOR;
+            (* :  for i = 8:14 *)
+            FOR b_i := 0 TO 6 DO 
+                (* :  if curve(i + 1, 2) == 0.0 *)
+                IF curve[b_i + 23] = 0.0 THEN 
+                    (* :  curve(i + 1, 2) = curve(i, 2); *)
+                    curve[b_i + 23] := curve[b_i + 22];
+                END_IF;
+            END_FOR;
+            (* :  for i = 8:2:-1 *)
+            (* :  switch pos *)
+            temp1 := DINT_TO_INT(pos + 1);
+            CASE temp1 OF
+                1: 
+                    (* :  case 1 *)
+                    (* :  Flow_h = curve(1, 1); *)
+                    Flow_h := curve[0];
+                15: 
+                    (* :  case 15 *)
+                    (* :  Flow_h = curve(15, 1); *)
+                    Flow_h := curve[14];
+                ELSE
+                    (* :  otherwise *)
+                    (* :  rTemp = curve(pos + 1, 2) - curve(pos, 2); *)
+                    rTemp_tmp := curve[15 + pos];
+                    rTemp := curve[pos + 16] - rTemp_tmp;
+                    (* :  if abs(rTemp) < 1e-5 *)
+                    IF ABS(rTemp) < 1.0E-5 THEN 
+                        (* :  rTemp = 1e-5; *)
+                        rTemp := 1.0E-5;
+                    END_IF;
+                    (* :  rTemp = (curve(pos + 1, 1) - curve(pos, 1)) / rTemp; *)
+                    rTemp := (curve[pos + 1] - curve[pos]) / rTemp;
+                    (* :  Flow_h = curve(pos, 1) + (siPoMech.Value - curve(pos, 2)) * rTemp; *)
+                    Flow_h := ((rtb_siPoMech.Value - rTemp_tmp) * rTemp) + curve[pos];
+            END_CASE;
+            (* :  siFlow.Value = Flow_h / TimeBase; *)
+            rtb_siFlow.Value := Flow_h / TimeBase;
+        END_IF;
+        (* Расчет напора *)
+        (* :  rDelHi = ((siP_Out.Value - siP_In.Value) * 1e5) / (Density * 9.81); *)
+        B := ((rtb_siP_Out.Value - rtb_siP_In.Value) * 100000.0) / (Density * 9.81);
+        (* :  if InSocket > 1 && PresSocket > 1 && abs(PresSocket - InSocket) > 2 *)
+        IF (InSocket > 1.0) AND (PresSocket > 1.0) THEN 
+            IF ABS(PresSocket - InSocket) > 2.0 THEN 
+                (* :  rSpdInSocket = 1.273240e+6 / (InSocket * InSocket) * siFlow.Value; *)
+                A := (1.27324E+6 / (InSocket * InSocket)) * rtb_siFlow.Value;
+                (* :  rSpdPresSocket = 1.273240e+6 / (PresSocket * PresSocket) * siFlow.Value; *)
+                b_temp := (1.27324E+6 / (PresSocket * PresSocket)) * rtb_siFlow.Value;
+                (* :  rDelHi = (rSpdPresSocket * rSpdPresSocket - rSpdInSocket * rSpdInSocket) / 19.62 + rDelHi; *)
+                B := (((b_temp * b_temp) - (A * A)) / 19.62) + B;
+            END_IF;
+        END_IF;
+        (* :  DelHi.Value = rDelHi * DelHiCorr + H_Geo; *)
+        (* :  DelHi.Value = max(DelHi.Value, 0.0); *)
+        temp_tmp := MAX(IN1:=(B * DelHiCorr) + H_Geo, IN2:=0.0);
+        rtb_DelHi.Value := temp_tmp;
+        (* :  stcInST(:) = 0; *)
+        FOR b_i := 0 TO 15 DO 
+            stcInST[b_i] := 0;
+        END_FOR;
+        (* :  stcInST(1) = Flow.QC; *)
+        stcInST[0] := Flow.QC;
+        (* :  stcInST(2) = P_In.QC; *)
+        stcInST[1] := P_In.QC;
+        (* :  stcInST(3) = P_Out.QC; *)
+        stcInST[2] := P_Out.QC;
+        (* :  if ~ConstSpd *)
+        IF  NOT ConstSpd THEN 
+            (* :  stcInST(4) = Spd.QC; *)
+            stcInST[3] := Spd.QC;
+        ELSE 
+            (* :  else *)
+            (* :  stcInST(4) = int16(QCcodes.Good); *)
+            stcInST[3] := 128;
+        END_IF;
+        (* stcInST(5) = DelHi.ST;        !!! *)
+        (* :  DelHi.QC = Utils.SelST16(stcInST, 4, 0); *)
+        i0_Utils_SelST16_l(InST := stcInST);
+        rtb_DelHi.QC := i0_Utils_SelST16_l.out;
+        (* Расчет гидравлической мощности *)
+        (* :  rTemp = siFlow.Value * DelHi.Value * Density * 9.811e-3; *)
+        (* :  siPoHydr.Value = rTemp * PoHydrCorr; *)
+        (* :  siPoHydr.Value = max(siPoHydr.Value, 0.0); *)
+        rtb_siPoHydr.Value := MAX(IN1:=(((rtb_siFlow.Value * temp_tmp) * Density) * 0.009811) * PoHydrCorr, IN2:=0.0);
+        (* :  stcInST(:) = 0; *)
+        FOR b_i := 0 TO 15 DO 
+            stcInST[b_i] := 0;
+        END_FOR;
+        (* :  stcInST(1) = Flow.QC; *)
+        stcInST[0] := Flow.QC;
+        (* :  stcInST(2) = P_In.QC; *)
+        stcInST[1] := P_In.QC;
+        (* :  stcInST(3) = P_Out.QC; *)
+        stcInST[2] := P_Out.QC;
+        (* stcInST(4) = siPoHydr.QC;     !!! *)
+        (* :  siPoHydr.QC = Utils.SelST16(stcInST, 3, 0); *)
+        i0_Utils_SelST16_l0(InST := stcInST);
+        rtb_siPoHydr.QC := i0_Utils_SelST16_l0.out;
+        (* Расчет КПД *)
+        (* :  EtaOut.Value = (EtaCorr * 100 * siPoHydr.Value) / (siPoMech.Value + 1.0e-5); *)
+        rtb_EtaOut.Value := (MAX(IN1:=(((rtb_siFlow.Value * temp_tmp) * Density) * 0.009811) * PoHydrCorr, IN2:=0.0) * (EtaCorr * 100.0)
+            ) / (rtb_siPoMech.Value + 1.0E-5);
+        (* :  if EtaOut.Value < 0.0 *)
+        IF rtb_EtaOut.Value < 0.0 THEN 
+            (* :  EtaOut.Value = 0.0; *)
+            rtb_EtaOut.Value := 0.0;
+        END_IF;
+        (* :  stcInST(:) = 0; *)
+        FOR b_i := 0 TO 15 DO 
+            stcInST[b_i] := 0;
+        END_FOR;
+        (* :  stcInST(1) = siPoMech.QC; *)
+        stcInST[0] := rtb_siPoMech.QC;
+        (* :  stcInST(2) = siPoHydr.QC; *)
+        stcInST[1] := rtb_siPoHydr.QC;
+        (* stcInST(3) = EtaOut.QC;    !!! *)
+        (* :  EtaOut.QC = Utils.SelST16(stcInST, 2, 0); *)
+        i0_Utils_SelST16(InST := stcInST);
+        rtb_EtaOut.QC := i0_Utils_SelST16.out;
+        (* Расчет NPSH *)
+        (* :  if InSocket > 1 *)
+        IF InSocket > 1.0 THEN 
+            (* :  rSpdInSocket = 1.27324e+6 / (InSocket * InSocket) * siFlow.Value; *)
+            A := (1.27324E+6 / (InSocket * InSocket)) * rtb_siFlow.Value;
+        ELSE 
+            (* :  else *)
+            (* :  rSpdInSocket = 0.0; *)
+            A := 0.0;
+        END_IF;
+        (* :  if Antoine *)
+        IF Antoine <> 0.0 THEN 
+            (* :  rTemp = AntA - AntB / (siTemp.Value + AntC); *)
+            (* :  rTemp = exp(rTemp * 2.3025851); *)
+            (* :  siP_Vapor = rTemp * AntFact; *)
+            siP_Vapor := EXP((AntA - (AntB / (rtb_siTemp.Value + AntC))) * 2.3025851) * AntFact;
+        ELSE 
+            (* :  else *)
+            (* :  siP_Vapor = P_Vapor; *)
+            siP_Vapor := P_Vapor;
+        END_IF;
+        (* :  rNpsh = (siP_In.Value - siP_Vapor) * 1e+5 / (Density * 9.81) + rSpdInSocket * rSpdInSocket / 19.62; *)
+        (* :  Npsh.Value = rNpsh * NpshCorr; *)
+        rtb_Npsh.Value := ((((rtb_siP_In.Value - siP_Vapor) * 100000.0) / (Density * 9.81)) + ((A * A) / 19.62)) * NpshCorr;
+        (* :  if Npsh.Value < 0.0 *)
+        IF rtb_Npsh.Value < 0.0 THEN 
+            (* :  Npsh.Value = 0.0; *)
+            rtb_Npsh.Value := 0.0;
+        END_IF;
+        (* :  stcInST(:) = 0; *)
+        FOR b_i := 0 TO 15 DO 
+            stcInST[b_i] := 0;
+        END_FOR;
+        (* :  stcInST(1) = Flow.QC; *)
+        stcInST[0] := Flow.QC;
+        (* :  stcInST(2) = P_In.QC; *)
+        stcInST[1] := P_In.QC;
+        (* :  stcInST(3) = Temp.QC; *)
+        stcInST[2] := Temp.QC;
+        (* :  if ~ConstSpd *)
+        IF  NOT ConstSpd THEN 
+            (* :  stcInST(4) = Spd.QC; *)
+            stcInST[3] := Spd.QC;
+        ELSE 
+            (* :  else *)
+            (* :  stcInST(4) = int16(QCcodes.Good); *)
+            stcInST[3] := 128;
+        END_IF;
+        (* stcInST.b4 := Npsh.ST;    !!! *)
+        (* :  Npsh.QC = Utils.SelST16(stcInST, 4, 0); *)
+        i0_Utils_SelST16_l(InST := stcInST);
+        rtb_Npsh.QC := i0_Utils_SelST16_l.out;
+        (* Сравнение факт. и теор. мощности *)
+        (* :  if ConstSpd *)
+        IF ConstSpd THEN 
+            (* :  rSpeedFact = 1; *)
+            rSpeedFact := 1.0;
+        ELSIF (rtb_siSpd.Value < 1.0) OR (SpdRate < 1.0) THEN 
+            (* :  elseif siSpd.Value < 1 || SpdRate < 1 *)
+            (* :  rSpeedFact = 1e-5; *)
+            rSpeedFact := 1.0E-5;
+        ELSE 
+            (* :  else *)
+            (* :  rSpeedFact = siSpd.Value / SpdRate; *)
+            rSpeedFact := rtb_siSpd.Value / SpdRate;
+        END_IF;
+        (* :  curve(1, 1) = Flow1; *)
+        curve[0] := Flow1;
+        (* :  curve(2, 1) = Flow2; *)
+        curve[1] := Flow2;
+        (* :  curve(3, 1) = Flow3; *)
+        curve[2] := Flow3;
+        (* :  curve(4, 1) = Flow4; *)
+        curve[3] := Flow4;
+        (* :  curve(5, 1) = Flow5; *)
+        curve[4] := Flow5;
+        (* :  curve(6, 1) = Flow6; *)
+        curve[5] := Flow6;
+        (* :  curve(7, 1) = Flow7; *)
+        curve[6] := Flow7;
+        (* :  curve(8, 1) = Flow8; *)
+        curve[7] := Flow8;
+        (* :  curve(9, 1) = Flow9; *)
+        curve[8] := Flow9;
+        (* :  curve(10, 1) = Flow10; *)
+        curve[9] := Flow10;
+        (* :  curve(11, 1) = Flow11; *)
+        curve[10] := Flow11;
+        (* :  curve(12, 1) = Flow12; *)
+        curve[11] := Flow12;
+        (* :  curve(13, 1) = Flow13; *)
+        curve[12] := Flow13;
+        (* :  curve(14, 1) = Flow14; *)
+        curve[13] := Flow14;
+        (* :  curve(15, 1) = Flow15; *)
+        curve[14] := Flow15;
+        (* :  pos = 1; *)
+        pos := 0;
+        (* :  rFlow = Flow_h / rSpeedFact; *)
+        B := Flow_h / rSpeedFact;
+        (* :  for i = 1 : 15 *)
+        FOR b_i := 0 TO 14 DO 
+            (* :  if rFlow >= curve(i, 1) *)
+            IF B >= curve[b_i] THEN 
+                (* :  pos = i; *)
+                pos := b_i;
+            END_IF;
+        END_FOR;
+        (* :  curve(1, 2) = Power1; *)
+        curve[15] := Power1;
+        (* :  curve(2, 2) = Power2; *)
+        curve[16] := Power2;
+        (* :  curve(3, 2) = Power3; *)
+        curve[17] := Power3;
+        (* :  curve(4, 2) = Power4; *)
+        curve[18] := Power4;
+        (* :  curve(5, 2) = Power5; *)
+        curve[19] := Power5;
+        (* :  curve(6, 2) = Power6; *)
+        curve[20] := Power6;
+        (* :  curve(7, 2) = Power7; *)
+        curve[21] := Power7;
+        (* :  curve(8, 2) = Power8; *)
+        curve[22] := Power8;
+        (* :  curve(9, 2) = Power9; *)
+        curve[23] := Power9;
+        (* :  curve(10, 2) = Power10; *)
+        curve[24] := Power10;
+        (* :  curve(11, 2) = Power11; *)
+        curve[25] := Power11;
+        (* :  curve(12, 2) = Power12; *)
+        curve[26] := Power12;
+        (* :  curve(13, 2) = Power13; *)
+        curve[27] := Power13;
+        (* :  curve(14, 2) = Power14; *)
+        curve[28] := Power14;
+        (* :  curve(15, 2) = Power15; *)
+        curve[29] := Power15;
+        (* :  for i = 8:14 *)
+        FOR b_i := 0 TO 6 DO 
+            (* :  if curve(i + 1, 2) == 0.0 *)
+            IF curve[b_i + 23] = 0.0 THEN 
+                (* :  curve(i + 1, 2) = curve(i, 2); *)
+                curve[b_i + 23] := curve[b_i + 22];
+            END_IF;
+        END_FOR;
+        (* :  for i = 8:2:-1 *)
+        (* :  switch pos *)
+        temp1 := DINT_TO_INT(pos + 1);
+        CASE temp1 OF
+            1: 
+                (* :  case 1 *)
+                (* :  SrCurvePoiPower = curve(1, 2); *)
+                SrCurvePoiPower := curve[15];
+            15: 
+                (* :  case 15 *)
+                (* :  SrCurvePoiPower = curve(15, 2); *)
+                SrCurvePoiPower := curve[29];
+            ELSE
+                (* :  otherwise *)
+                (* :  rTemp = curve(pos + 1, 1) - curve(pos, 1); *)
+                rTemp := curve[pos + 1] - curve[pos];
+                (* :  if abs(rTemp) < 1e-5 *)
+                IF ABS(rTemp) < 1.0E-5 THEN 
+                    (* :  rTemp = 1e-5; *)
+                    rTemp := 1.0E-5;
+                END_IF;
+                (* :  rTemp = (curve(pos + 1, 2) - curve(pos, 2)) / rTemp; *)
+                rTemp_tmp := curve[15 + pos];
+                rTemp := (curve[pos + 16] - rTemp_tmp) / rTemp;
+                (* :  SrCurvePoiPower = curve(pos, 2) + (rFlow - curve(pos, 1)) * rTemp; *)
+                SrCurvePoiPower := ((B - curve[pos]) * rTemp) + rTemp_tmp;
+        END_CASE;
+        (* :  SrCurvePoiPower = SrCurvePoiPower * rSpeedFact * rSpeedFact * rSpeedFact; *)
+        SrCurvePoiPower := ((SrCurvePoiPower * rSpeedFact) * rSpeedFact) * rSpeedFact;
+        (* :  if SrCurvePoiPower > PowerMax *)
+        IF SrCurvePoiPower > PowerMax THEN 
+            (* :  SrCurvePoiPower = PowerMax; *)
+            SrCurvePoiPower := PowerMax;
+        ELSIF SrCurvePoiPower < 0.0 THEN 
+            (* :  elseif SrCurvePoiPower < 0.0 *)
+            (* :  SrCurvePoiPower = 1e-5; *)
+            SrCurvePoiPower := 1.0E-5;
+        END_IF;
+        (* :  DevPower = siPoMech.Value - SrCurvePoiPower; *)
+        (* :  MinTolPower = (1 - 0.01 * PowerTol) * SrCurvePoiPower; *)
+        (* :  MaxTolPower = (0.01 * PowerTol + 1) * SrCurvePoiPower; *)
+        (* :  RelPower = (siPoMech.Value - SrCurvePoiPower) * 100 / SrCurvePoiPower; *)
+        DevPower := rtb_siPoMech.Value - SrCurvePoiPower;
+        RelPower := (DevPower * 100.0) / SrCurvePoiPower;
+        (* :  if RelPower > 100 *)
+        IF RelPower > 100.0 THEN 
+            (* :  RelPower = 100; *)
+            RelPower := 100.0;
+        ELSIF RelPower < -100.0 THEN 
+            (* :  elseif RelPower < -100 *)
+            (* :  RelPower = -100; *)
+            RelPower := -100.0;
+        END_IF;
+        (* Сравнение факт. и теор. напора *)
+        (* :  curve(1, 2) = DelHi1; *)
+        curve[15] := DelHi1;
+        (* :  curve(2, 2) = DelHi2; *)
+        curve[16] := DelHi2;
+        (* :  curve(3, 2) = DelHi3; *)
+        curve[17] := DelHi3;
+        (* :  curve(4, 2) = DelHi4; *)
+        curve[18] := DelHi4;
+        (* :  curve(5, 2) = DelHi5; *)
+        curve[19] := DelHi5;
+        (* :  curve(6, 2) = DelHi6; *)
+        curve[20] := DelHi6;
+        (* :  curve(7, 2) = DelHi7; *)
+        curve[21] := DelHi7;
+        (* :  curve(8, 2) = DelHi8; *)
+        curve[22] := DelHi8;
+        (* :  curve(9, 2) = DelHi9; *)
+        curve[23] := DelHi9;
+        (* :  curve(10, 2) = DelHi10; *)
+        curve[24] := DelHi10;
+        (* :  curve(11, 2) = DelHi11; *)
+        curve[25] := DelHi11;
+        (* :  curve(12, 2) = DelHi12; *)
+        curve[26] := DelHi12;
+        (* :  curve(13, 2) = DelHi13; *)
+        curve[27] := DelHi13;
+        (* :  curve(14, 2) = DelHi14; *)
+        curve[28] := DelHi14;
+        (* :  curve(15, 2) = DelHi15; *)
+        curve[29] := DelHi15;
+        (* :  for i = 8:14 *)
+        FOR b_i := 0 TO 6 DO 
+            (* :  if curve(i + 1, 2) == 0.0 *)
+            IF curve[b_i + 23] = 0.0 THEN 
+                (* :  curve(i + 1, 2) = curve(i, 2); *)
+                curve[b_i + 23] := curve[b_i + 22];
+            END_IF;
+        END_FOR;
+        (* :  for i = 8:2:-1 *)
+        (* :  switch pos *)
+        temp1 := DINT_TO_INT(pos + 1);
+        CASE temp1 OF
+            1: 
+                (* :  case 1 *)
+                (* :  SrCurvePoiDelHi = curve(1, 2); *)
+                b_temp := curve[15];
+            15: 
+                (* :  case 15 *)
+                (* :  SrCurvePoiDelHi = curve(15, 2); *)
+                b_temp := curve[29];
+            ELSE
+                (* :  otherwise *)
+                (* :  rTemp = curve(pos + 1, 1) - curve(pos, 1); *)
+                rTemp := curve[pos + 1] - curve[pos];
+                (* :  if abs(rTemp) < 1e-5 *)
+                IF ABS(rTemp) < 1.0E-5 THEN 
+                    (* :  rTemp = 1e-5; *)
+                    rTemp := 1.0E-5;
+                END_IF;
+                (* :  rTemp = (curve(pos + 1, 2) - curve(pos, 2)) / rTemp; *)
+                rTemp_tmp := curve[15 + pos];
+                rTemp := (curve[pos + 16] - rTemp_tmp) / rTemp;
+                (* :  SrCurvePoiDelHi = curve(pos, 2) + (rFlow - curve(pos, 1)) * rTemp; *)
+                b_temp := ((B - curve[pos]) * rTemp) + rTemp_tmp;
+        END_CASE;
+        (* :  SrCurvePoiDelHi = SrCurvePoiDelHi * rSpeedFact * rSpeedFact; *)
+        b_temp := (b_temp * rSpeedFact) * rSpeedFact;
+        (* :  if SrCurvePoiDelHi > DelHiMax *)
+        IF b_temp > DelHiMax THEN 
+            (* :  SrCurvePoiDelHi = DelHiMax; *)
+            b_temp := DelHiMax;
+        ELSIF b_temp < 0.0 THEN 
+            (* :  elseif SrCurvePoiDelHi < 0 *)
+            (* :  SrCurvePoiDelHi = 1e-5; *)
+            b_temp := 1.0E-5;
+        END_IF;
+        (* :  DevDelHi = DelHi.Value - SrCurvePoiDelHi; *)
+        (* :  MinTolDelHi = (1 - 0.01 * DelHiTol) * SrCurvePoiDelHi; *)
+        (* :  MaxTolDelHi = (0.01 * DelHiTol + 1) * SrCurvePoiDelHi; *)
+        (* :  RelDelHi = (DelHi.Value - SrCurvePoiDelHi) * 100 / SrCurvePoiDelHi; *)
+        DevDelHi := temp_tmp - b_temp;
+        RelDelHi := (DevDelHi * 100.0) / b_temp;
+        (* :  if RelDelHi > 100 *)
+        IF RelDelHi > 100.0 THEN 
+            (* :  RelDelHi = 100; *)
+            RelDelHi := 100.0;
+        ELSIF RelDelHi < -100.0 THEN 
+            (* :  elseif RelDelHi < -100 *)
+            (* :  RelDelHi = -100; *)
+            RelDelHi := -100.0;
+        END_IF;
+        (* Сравнение факт. и теор. КПД *)
+        (* :  curve(1, 2) = Eta1; *)
+        curve[15] := Eta1;
+        (* :  curve(2, 2) = Eta2; *)
+        curve[16] := Eta2;
+        (* :  curve(3, 2) = Eta3; *)
+        curve[17] := Eta3;
+        (* :  curve(4, 2) = Eta4; *)
+        curve[18] := Eta4;
+        (* :  curve(5, 2) = Eta5; *)
+        curve[19] := Eta5;
+        (* :  curve(6, 2) = Eta6; *)
+        curve[20] := Eta6;
+        (* :  curve(7, 2) = Eta7; *)
+        curve[21] := Eta7;
+        (* :  curve(8, 2) = Eta8; *)
+        curve[22] := Eta8;
+        (* :  curve(9, 2) = Eta9; *)
+        curve[23] := Eta9;
+        (* :  curve(10, 2) = Eta10; *)
+        curve[24] := Eta10;
+        (* :  curve(11, 2) = Eta11; *)
+        curve[25] := Eta11;
+        (* :  curve(12, 2) = Eta12; *)
+        curve[26] := Eta12;
+        (* :  curve(13, 2) = Eta13; *)
+        curve[27] := Eta13;
+        (* :  curve(14, 2) = Eta14; *)
+        curve[28] := Eta14;
+        (* :  curve(15, 2) = Eta15; *)
+        curve[29] := Eta15;
+        (* :  for i = 8:14 *)
+        FOR b_i := 0 TO 6 DO 
+            (* :  if curve(i + 1, 2) == 0.0 *)
+            IF curve[b_i + 23] = 0.0 THEN 
+                (* :  curve(i + 1, 2) = curve(i, 2); *)
+                curve[b_i + 23] := curve[b_i + 22];
+            END_IF;
+        END_FOR;
+        (* :  for i = 8:2:-1 *)
+        (* :  switch pos *)
+        temp1 := DINT_TO_INT(pos + 1);
+        CASE temp1 OF
+            1: 
+                (* :  case 1 *)
+                (* :  SrCurvePoiEta = curve(1, 2); *)
+                A := curve[15];
+            15: 
+                (* :  case 15 *)
+                (* :  SrCurvePoiEta = curve(15, 2); *)
+                A := curve[29];
+            ELSE
+                (* :  otherwise *)
+                (* :  rTemp = curve(pos + 1, 1) - curve(pos, 1); *)
+                rTemp := curve[pos + 1] - curve[pos];
+                (* :  if abs(rTemp) < 1e-5 *)
+                IF ABS(rTemp) < 1.0E-5 THEN 
+                    (* :  rTemp = 1e-5; *)
+                    rTemp := 1.0E-5;
+                END_IF;
+                (* :  rTemp = (curve(pos + 1, 2) - curve(pos, 2)) / rTemp; *)
+                rTemp_tmp := curve[15 + pos];
+                rTemp := (curve[pos + 16] - rTemp_tmp) / rTemp;
+                (* :  SrCurvePoiEta = curve(pos, 2) + (rFlow - curve(pos, 1)) * rTemp; *)
+                A := ((B - curve[pos]) * rTemp) + rTemp_tmp;
+        END_CASE;
+        (* :  if SrCurvePoiEta > EtaMax *)
+        IF A > EtaMax THEN 
+            (* :  SrCurvePoiEta = EtaMax; *)
+            A := EtaMax;
+        ELSIF A < 0.0 THEN 
+            (* :  elseif SrCurvePoiEta < 0 *)
+            (* :  SrCurvePoiEta = 1e-5; *)
+            A := 1.0E-5;
+        END_IF;
+        (* :  DevEta = EtaOut.Value - SrCurvePoiEta; *)
+        (* :  MinTolEta = (1 - 0.01 * EtaTol) * SrCurvePoiEta; *)
+        (* :  MaxTolEta = (0.01 * EtaTol + 1) * SrCurvePoiEta; *)
+        (* :  RelEta = (EtaOut.Value - SrCurvePoiEta) * 100 / SrCurvePoiEta; *)
+        DevEta := rtb_EtaOut.Value - A;
+        RelEta := (DevEta * 100.0) / A;
+        (* :  if RelEta > 100 *)
+        IF RelEta > 100.0 THEN 
+            (* :  RelEta = 100; *)
+            RelEta := 100.0;
+        ELSIF RelEta < -100.0 THEN 
+            (* :  elseif RelEta < -100 *)
+            (* :  RelEta = -100; *)
+            RelEta := -100.0;
+        END_IF;
+        (* Сравнение факт. и теор. NPSH *)
+        (* :  curve(1, 1) = FlowNp1; *)
+        curve[0] := FlowNp1;
+        (* :  curve(2, 1) = FlowNp2; *)
+        curve[1] := FlowNp2;
+        (* :  curve(3, 1) = FlowNp3; *)
+        curve[2] := FlowNp3;
+        (* :  curve(4, 1) = FlowNp4; *)
+        curve[3] := FlowNp4;
+        (* :  curve(5, 1) = FlowNp5; *)
+        curve[4] := FlowNp5;
+        (* :  curve(6, 1) = FlowNp6; *)
+        curve[5] := FlowNp6;
+        (* :  curve(7, 1) = FlowNp7; *)
+        curve[6] := FlowNp7;
+        (* :  curve(8, 1) = FlowNp8; *)
+        curve[7] := FlowNp8;
+        (* :  curve(9, 1) = FlowNp9; *)
+        curve[8] := FlowNp9;
+        (* :  curve(10, 1) = FlowNp10; *)
+        curve[9] := FlowNp10;
+        (* :  curve(11, 1) = FlowNp11; *)
+        curve[10] := FlowNp11;
+        (* :  curve(12, 1) = FlowNp12; *)
+        curve[11] := FlowNp12;
+        (* :  curve(13, 1) = FlowNp13; *)
+        curve[12] := FlowNp13;
+        (* :  curve(14, 1) = FlowNp14; *)
+        curve[13] := FlowNp14;
+        (* :  curve(15, 1) = FlowNp15; *)
+        curve[14] := FlowNp15;
+        (* :  posNpsh = 1; *)
+        pos := 0;
+        (* :  for i = 1 : 15 *)
+        FOR b_i := 0 TO 14 DO 
+            (* :  if rFlow >= curve(i, 1) *)
+            IF B >= curve[b_i] THEN 
+                (* :  posNpsh = i; *)
+                pos := b_i;
+            END_IF;
+        END_FOR;
+        (* :  curve(1, 2) = Npsh1; *)
+        curve[15] := Npsh1;
+        (* :  curve(2, 2) = Npsh2; *)
+        curve[16] := Npsh2;
+        (* :  curve(3, 2) = Npsh3; *)
+        curve[17] := Npsh3;
+        (* :  curve(4, 2) = Npsh4; *)
+        curve[18] := Npsh4;
+        (* :  curve(5, 2) = Npsh5; *)
+        curve[19] := Npsh5;
+        (* :  curve(6, 2) = Npsh6; *)
+        curve[20] := Npsh6;
+        (* :  curve(7, 2) = Npsh7; *)
+        curve[21] := Npsh7;
+        (* :  curve(8, 2) = Npsh8; *)
+        curve[22] := Npsh8;
+        (* :  curve(9, 2) = Npsh9; *)
+        curve[23] := Npsh9;
+        (* :  curve(10, 2) = Npsh10; *)
+        curve[24] := Npsh10;
+        (* :  curve(11, 2) = Npsh11; *)
+        curve[25] := Npsh11;
+        (* :  curve(12, 2) = Npsh12; *)
+        curve[26] := Npsh12;
+        (* :  curve(13, 2) = Npsh13; *)
+        curve[27] := Npsh13;
+        (* :  curve(14, 2) = Npsh14; *)
+        curve[28] := Npsh14;
+        (* :  curve(15, 2) = Npsh15; *)
+        curve[29] := Npsh15;
+        (* :  for i = 8:14 *)
+        FOR b_i := 0 TO 6 DO 
+            (* :  if curve(i + 1, 2) == 0.0 *)
+            IF curve[b_i + 23] = 0.0 THEN 
+                (* :  curve(i + 1, 2) = curve(i, 2); *)
+                curve[b_i + 23] := curve[b_i + 22];
+            END_IF;
+        END_FOR;
+        (* :  for i = 8:2:-1 *)
+        (* :  switch posNpsh *)
+        temp1 := DINT_TO_INT(pos + 1);
+        CASE temp1 OF
+            1: 
+                (* :  case 1 *)
+                (* :  SrCurvePoiNpsh = curve(1, 2); *)
+                B := curve[15];
+            15: 
+                (* :  case 15 *)
+                (* :  SrCurvePoiNpsh = curve(15, 2); *)
+                B := curve[29];
+            ELSE
+                (* :  otherwise *)
+                (* :  rTemp = curve(posNpsh + 1, 1) - curve(posNpsh, 1); *)
+                rTemp := curve[pos + 1] - curve[pos];
+                (* :  if abs(rTemp) < 1e-5 *)
+                IF ABS(rTemp) < 1.0E-5 THEN 
+                    (* :  rTemp = 1e-5; *)
+                    rTemp := 1.0E-5;
+                END_IF;
+                (* :  rTemp = (curve(posNpsh + 1, 2) - curve(posNpsh, 2)) / rTemp; *)
+                rTemp_tmp := curve[15 + pos];
+                rTemp := (curve[pos + 16] - rTemp_tmp) / rTemp;
+                (* :  SrCurvePoiNpsh = curve(posNpsh, 2) + (rFlow - curve(posNpsh, 1)) * rTemp; *)
+                B := ((B - curve[pos]) * rTemp) + rTemp_tmp;
+        END_CASE;
+        (* :  SrCurvePoiNpsh = SrCurvePoiNpsh * rSpeedFact * rSpeedFact; *)
+        B := (B * rSpeedFact) * rSpeedFact;
+        (* :  if SrCurvePoiNpsh > NpshMax *)
+        IF B > NpshMax THEN 
+            (* :  SrCurvePoiNpsh = NpshMax; *)
+            B := NpshMax;
+        ELSIF B < 0.0 THEN 
+            (* :  elseif SrCurvePoiNpsh < 0 *)
+            (* :  SrCurvePoiNpsh = 1e-5; *)
+            B := 1.0E-5;
+        END_IF;
+        (* :  DevNpsh = Npsh.Value - SrCurvePoiNpsh; *)
+        DevNpsh := rtb_Npsh.Value - B;
+        (* :  MaxTolNpsh = SrCurvePoiNpsh + NpshTol; *)
+        (* :  RelNpsh = (Npsh.Value - SrCurvePoiNpsh) / SrCurvePoiNpsh; *)
+        RelNpsh := DevNpsh / B;
+        (* :  if RelNpsh > 100 *)
+        IF RelNpsh > 100.0 THEN 
+            (* :  RelNpsh = 100; *)
+            RelNpsh := 100.0;
+        ELSIF RelNpsh < -100.0 THEN 
+            (* :  elseif RelNpsh < -100 *)
+            (* :  RelNpsh = -100; *)
+            RelNpsh := -100.0;
+        END_IF;
+        (* Расчет времени работы в разных интервалах расхода *)
+        (* :  if SrFlowMaxOld ~= FlowMax || LoadRstOp *)
+        IF (SrFlowMaxOld <> FlowMax) OR LoadRstOp THEN 
+            (* :  SrFlowMaxOld = FlowMax; *)
+            SrFlowMaxOld := FlowMax;
+            (* :  LoadTime = 0; *)
+            LoadTime := 0.0;
+            (* :  Load0 = 0; *)
+            Load0 := 0.0;
+            (* :  Load1 = 0; *)
+            Load1 := 0.0;
+            (* :  Load2 = 0; *)
+            Load2 := 0.0;
+            (* :  Load3 = 0; *)
+            Load3 := 0.0;
+            (* :  Load4 = 0; *)
+            Load4 := 0.0;
+            (* :  Load5 = 0; *)
+            Load5 := 0.0;
+            (* :  Load6 = 0; *)
+            Load6 := 0.0;
+            (* :  Load7 = 0; *)
+            Load7 := 0.0;
+            (* :  Load8 = 0; *)
+            Load8 := 0.0;
+            (* :  Load9 = 0; *)
+            Load9 := 0.0;
+            (* :  Load10 = 0; *)
+            Load10 := 0.0;
+            (* :  DevNpsh0 = 0; *)
+            DevNpsh0 := 0.0;
+            (* :  DevNpsh1 = 0; *)
+            DevNpsh1 := 0.0;
+            (* :  DevNpsh2 = 0; *)
+            DevNpsh2 := 0.0;
+            (* :  DevNpsh3 = 0; *)
+            DevNpsh3 := 0.0;
+            (* :  DevNpsh4 = 0; *)
+            DevNpsh4 := 0.0;
+            (* :  DevNpsh5 = 0; *)
+            DevNpsh5 := 0.0;
+            (* :  DevNpsh6 = 0; *)
+            DevNpsh6 := 0.0;
+            (* :  DevNpsh7 = 0; *)
+            DevNpsh7 := 0.0;
+            (* :  DevNpsh8 = 0; *)
+            DevNpsh8 := 0.0;
+            (* :  DevNpsh9 = 0; *)
+            DevNpsh9 := 0.0;
+            (* :  DevNpsh10 = 0; *)
+            DevNpsh10 := 0.0;
+            (* :  for i = 1:12 *)
+            FOR pos := 0 TO 11 DO 
+                (* :  rangeCnt(i) = 0.0; *)
+                rangeCnt[pos] := 0.0;
+                (* :  rangeCntNpsh(i) = 0.0; *)
+                rangeCntNpsh[pos] := 0.0;
+            END_FOR;
+        ELSE 
+            (* :  else *)
+            (* :  rangeCnt(11) = rangeCnt(11) + 1.0; *)
+            rangeCnt[10] := rangeCnt[10] + 1.0;
+            (* :  rTemp = 10.0 * siFlow.Value * TimeBase / (FlowMax + 1e-5); *)
+            rTemp := ((10.0 * rtb_siFlow.Value) * TimeBase) / (FlowMax + 1.0E-5);
+            (* :  if ~Running.Value || PoElec.Value <= 1e-5 *)
+            SlipCorr_0 :=  NOT Running.Value;
+            IF SlipCorr_0 OR (PoElec.Value <= 1.0E-5) THEN 
+                (* :  nCount = 12; *)
+                pos := 11;
+            ELSIF rTemp <= 1.0 THEN 
+                (* :  elseif rTemp <= 1.0 *)
+                (* :  nCount = 1; *)
+                pos := 0;
+            ELSIF rTemp <= 2.0 THEN 
+                (* :  elseif rTemp <= 2.0 *)
+                (* :  nCount = 2; *)
+                pos := 1;
+            ELSIF rTemp <= 3.0 THEN 
+                (* :  elseif rTemp <= 3.0 *)
+                (* :  nCount = 3; *)
+                pos := 2;
+            ELSIF rTemp <= 4.0 THEN 
+                (* :  elseif rTemp <= 4.0 *)
+                (* :  nCount = 4; *)
+                pos := 3;
+            ELSIF rTemp <= 5.0 THEN 
+                (* :  elseif rTemp <= 5.0 *)
+                (* :  nCount = 5; *)
+                pos := 4;
+            ELSIF rTemp <= 6.0 THEN 
+                (* :  elseif rTemp <= 6.0 *)
+                (* :  nCount = 6; *)
+                pos := 5;
+            ELSIF rTemp <= 7.0 THEN 
+                (* :  elseif rTemp <= 7.0 *)
+                (* :  nCount = 7; *)
+                pos := 6;
+            ELSIF rTemp <= 8.0 THEN 
+                (* :  elseif rTemp <= 8.0 *)
+                (* :  nCount = 8; *)
+                pos := 7;
+            ELSIF rTemp <= 9.0 THEN 
+                (* :  elseif rTemp <= 9.0 *)
+                (* :  nCount = 9; *)
+                pos := 8;
+            ELSE 
+                (* :  else *)
+                (* :  nCount = 10; *)
+                pos := 9;
+            END_IF;
+            (* :  rangeCnt(nCount) = rangeCnt(nCount) + 1.0; *)
+            rangeCnt[pos] := rangeCnt[pos] + 1.0;
+            (* :  LoadTime = rangeCnt(11) * SampleTime / 3600; *)
+            LoadTime := (rangeCnt[10] * SampleTime) / 3600.0;
+            (* :  Load0 = rangeCnt(12) / rangeCnt(11); *)
+            Load0 := rangeCnt[11] / rangeCnt[10];
+            (* :  Load1 = rangeCnt(1) / rangeCnt(11); *)
+            Load1 := rangeCnt[0] / rangeCnt[10];
+            (* :  Load2 = rangeCnt(2) / rangeCnt(11); *)
+            Load2 := rangeCnt[1] / rangeCnt[10];
+            (* :  Load3 = rangeCnt(3) / rangeCnt(11); *)
+            Load3 := rangeCnt[2] / rangeCnt[10];
+            (* :  Load4 = rangeCnt(4) / rangeCnt(11); *)
+            Load4 := rangeCnt[3] / rangeCnt[10];
+            (* :  Load5 = rangeCnt(5) / rangeCnt(11); *)
+            Load5 := rangeCnt[4] / rangeCnt[10];
+            (* :  Load6 = rangeCnt(6) / rangeCnt(11); *)
+            Load6 := rangeCnt[5] / rangeCnt[10];
+            (* :  Load7 = rangeCnt(7) / rangeCnt(11); *)
+            Load7 := rangeCnt[6] / rangeCnt[10];
+            (* :  Load8 = rangeCnt(8) / rangeCnt(11); *)
+            Load8 := rangeCnt[7] / rangeCnt[10];
+            (* :  Load9 = rangeCnt(9) / rangeCnt(11); *)
+            Load9 := rangeCnt[8] / rangeCnt[10];
+            (* :  Load10 = rangeCnt(10) / rangeCnt(11); *)
+            Load10 := rangeCnt[9] / rangeCnt[10];
+            (* :  rangeCntNpsh(11) = rangeCntNpsh(11) + 1.0; *)
+            rangeCntNpsh[10] := rangeCntNpsh[10] + 1.0;
+            (* :  if ~Running.Value || PoElec.Value <= 1e-5 *)
+            IF SlipCorr_0 OR (PoElec.Value <= 1.0E-5) THEN 
+                (* :  nCount = 0; *)
+                pos := -1;
+            ELSIF DevNpsh <= -1.0 THEN 
+                (* :  elseif DevNpsh <= -1.0 *)
+                (* :  nCount = 1; *)
+                pos := 0;
+            ELSIF DevNpsh <= -0.5 THEN 
+                (* :  elseif DevNpsh <= -0.5 *)
+                (* :  nCount = 2; *)
+                pos := 1;
+            ELSIF DevNpsh <= 0.0 THEN 
+                (* :  elseif DevNpsh <= 0.0 *)
+                (* :  nCount = 3; *)
+                pos := 2;
+            ELSIF DevNpsh <= 0.5 THEN 
+                (* :  elseif DevNpsh <= 0.5 *)
+                (* :  nCount = 4; *)
+                pos := 3;
+            ELSIF DevNpsh <= 1.0 THEN 
+                (* :  elseif DevNpsh <= 1.0 *)
+                (* :  nCount = 5; *)
+                pos := 4;
+            ELSIF DevNpsh <= 1.5 THEN 
+                (* :  elseif DevNpsh <= 1.5 *)
+                (* :  nCount = 6; *)
+                pos := 5;
+            ELSIF DevNpsh <= 2.0 THEN 
+                (* :  elseif DevNpsh <= 2.0 *)
+                (* :  nCount = 7; *)
+                pos := 6;
+            ELSIF DevNpsh <= 2.5 THEN 
+                (* :  elseif DevNpsh <= 2.5 *)
+                (* :  nCount = 8; *)
+                pos := 7;
+            ELSIF DevNpsh <= 3.0 THEN 
+                (* :  elseif DevNpsh <= 3.0 *)
+                (* :  nCount = 9; *)
+                pos := 8;
+            ELSE 
+                (* :  else *)
+                (* :  nCount = 10; *)
+                pos := 9;
+            END_IF;
+            (* :  rangeCntNpsh(nCount) = rangeCntNpsh(nCount) + 1.0; *)
+            rangeCntNpsh[pos] := rangeCntNpsh[pos] + 1.0;
+            (* :  DevNpsh0 = rangeCntNpsh(12) / rangeCntNpsh(11); *)
+            DevNpsh0 := rangeCntNpsh[11] / rangeCntNpsh[10];
+            (* :  DevNpsh1 = rangeCntNpsh(1) / rangeCntNpsh(11); *)
+            DevNpsh1 := rangeCntNpsh[0] / rangeCntNpsh[10];
+            (* :  DevNpsh2 = rangeCntNpsh(2) / rangeCntNpsh(11); *)
+            DevNpsh2 := rangeCntNpsh[1] / rangeCntNpsh[10];
+            (* :  DevNpsh3 = rangeCntNpsh(3) / rangeCntNpsh(11); *)
+            DevNpsh3 := rangeCntNpsh[2] / rangeCntNpsh[10];
+            (* :  DevNpsh4 = rangeCntNpsh(4) / rangeCntNpsh(11); *)
+            DevNpsh4 := rangeCntNpsh[3] / rangeCntNpsh[10];
+            (* :  DevNpsh5 = rangeCntNpsh(5) / rangeCntNpsh(11); *)
+            DevNpsh5 := rangeCntNpsh[4] / rangeCntNpsh[10];
+            (* :  DevNpsh6 = rangeCntNpsh(6) / rangeCntNpsh(11); *)
+            DevNpsh6 := rangeCntNpsh[5] / rangeCntNpsh[10];
+            (* :  DevNpsh7 = rangeCntNpsh(7) / rangeCntNpsh(11); *)
+            DevNpsh7 := rangeCntNpsh[6] / rangeCntNpsh[10];
+            (* :  DevNpsh8 = rangeCntNpsh(8) / rangeCntNpsh(11); *)
+            DevNpsh8 := rangeCntNpsh[7] / rangeCntNpsh[10];
+            (* :  DevNpsh9 = rangeCntNpsh(9) / rangeCntNpsh(11); *)
+            DevNpsh9 := rangeCntNpsh[8] / rangeCntNpsh[10];
+            (* :  DevNpsh10 = rangeCntNpsh(10) / rangeCntNpsh(11); *)
+            DevNpsh10 := rangeCntNpsh[9] / rangeCntNpsh[10];
+        END_IF;
+        siPoMech := rtb_siPoMech;
+        siPoElec := rtb_siPoElec;
+        siSpd := rtb_siSpd;
+        siFlow := rtb_siFlow;
+        siP_Out := rtb_siP_Out;
+        siP_In := rtb_siP_In;
+        DelHi := rtb_DelHi;
+        siPoHydr := rtb_siPoHydr;
+        EtaOut := rtb_EtaOut;
+        siTemp := rtb_siTemp;
+        Npsh := rtb_Npsh;
+        MinTolPower := (1.0 - (0.01 * PowerTol)) * SrCurvePoiPower;
+        MaxTolPower := ((0.01 * PowerTol) + 1.0) * SrCurvePoiPower;
+        MinTolDelHi := (1.0 - (0.01 * DelHiTol)) * b_temp;
+        MaxTolDelHi := ((0.01 * DelHiTol) + 1.0) * b_temp;
+        MaxTolEta := ((0.01 * EtaTol) + 1.0) * A;
+        MaxTolNpsh := B + NpshTol;
+        MinTolEta := (1.0 - (0.01 * EtaTol)) * A;
+END_CASE;
+END_FUNCTION_BLOCK

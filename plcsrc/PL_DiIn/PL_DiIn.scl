@@ -1,0 +1,69 @@
+(*
+ *
+ * File: PL_DiIn.scl
+ *
+ * IEC 61131-3 Structured Text (ST) code generated for subsystem "TestLib/PL/Channel/PL_DiIn"
+ *
+ * Model name                      : TestLib
+ * Model version                   : 1.151
+ * Model creator                   : Konstantin
+ * Model last modified by          : Konstantin
+ * Model last modified on          : Fri May 24 15:38:36 2019
+ * Model sample time               : 0.1s
+ * Subsystem name                  : TestLib/PL/Channel/PL_DiIn
+ * Subsystem sample time           : 0.1s
+ * Simulink PLC Coder version      : 3.0 (R2019a) 23-Nov-2018
+ * ST code generated on            : Fri May 24 15:42:21 2019
+ *
+ * Target IDE selection            : Siemens TIA Portal
+ * Test Bench included             : No
+ *
+ *)
+TYPE DigVal
+    STRUCT
+        Value: BOOL;
+        QC: INT;
+    END_STRUCT
+END_TYPE
+TYPE DigValRaw
+    STRUCT
+        Value: BOOL;
+        QC: INT;
+    END_STRUCT
+END_TYPE
+FUNCTION_BLOCK PL_DiIn
+VAR_INPUT
+    SimOn: BOOL;
+    SimPV_In: BOOL;
+    PV_In: DigValRaw;
+END_VAR
+VAR_OUTPUT
+    PV_Out: DigVal;
+    bad: BOOL;
+END_VAR
+VAR
+END_VAR
+(* MATLAB Function: '<Root>/PL_DiIn' incorporates:
+ *  BusCreator: '<Root>/BusConversion_InsertedFor_PL_DiIn_at_inport_2'
+ *  Outport: '<Root>/PV_Out' *)
+(* dffgdf *)
+(* MATLAB Function 'PL_DiIn': '<S1>:1' *)
+(* '<S1>:1:6' if SimOn *)
+IF SimOn THEN 
+    (* '<S1>:1:7' PV_Out.Value = SimPV_In; *)
+    PV_Out.Value := SimPV_In;
+    (* '<S1>:1:8' PV_Out.QC = int16(QCcodes.Simulation); *)
+    PV_Out.QC := 96;
+ELSE 
+    (* '<S1>:1:9' else *)
+    (* '<S1>:1:10' PV_Out.Value = PV_In.Value; *)
+    PV_Out.Value := PV_In.Value;
+    (* '<S1>:1:11' PV_Out.QC = PV_In.QC; *)
+    PV_Out.QC := PV_In.QC;
+END_IF;
+(* Outport: '<Root>/bad' incorporates:
+ *  BusCreator: '<Root>/BusConversion_InsertedFor_PL_DiIn_at_inport_2'
+ *  MATLAB Function: '<Root>/PL_DiIn' *)
+(* '<S1>:1:14' bad = PV_In.QC == QCcodes.Bad; *)
+bad := PV_In.QC = 0;
+END_FUNCTION_BLOCK

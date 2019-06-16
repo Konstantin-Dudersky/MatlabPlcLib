@@ -1,0 +1,115 @@
+(*
+ *
+ * File: Channel.scl
+ *
+ * IEC 61131-3 Structured Text (ST) code generated for subsystem "TestLib/PL/Channel"
+ *
+ * Model name                      : TestLib
+ * Model version                   : 1.151
+ * Model creator                   : Konstantin
+ * Model last modified by          : Konstantin
+ * Model last modified on          : Fri May 24 15:38:36 2019
+ * Model sample time               : 0.1s
+ * Subsystem name                  : TestLib/PL/Channel
+ * Subsystem sample time           : 0.1s
+ * Simulink PLC Coder version      : 3.0 (R2019a) 23-Nov-2018
+ * ST code generated on            : Fri May 24 15:44:08 2019
+ *
+ * Target IDE selection            : Siemens TIA Portal
+ * Test Bench included             : No
+ *
+ *)
+TYPE DigValRaw
+    STRUCT
+        Value: BOOL;
+        QC: INT;
+    END_STRUCT
+END_TYPE
+TYPE DigVal
+    STRUCT
+        Value: BOOL;
+        QC: INT;
+    END_STRUCT
+END_TYPE
+FUNCTION_BLOCK PL_DiOu
+VAR_INPUT
+    PV_In: DigVal;
+    PV_QC: INT;
+    SimOn: BOOL;
+    SimPV_In: BOOL;
+END_VAR
+VAR_OUTPUT
+    PV_Out: BOOL;
+    bad: BOOL;
+END_VAR
+VAR
+END_VAR
+(* MATLAB Function 'Channel/PL_DiOu': '<S3>:1' *)
+(* '<S3>:1:4' if SimOn *)
+IF SimOn THEN 
+    (* '<S3>:1:5' PV_Out = SimPV_In; *)
+    PV_Out := SimPV_In;
+ELSE 
+    (* '<S3>:1:6' else *)
+    (* '<S3>:1:7' PV_Out = PV_In.Value; *)
+    PV_Out := PV_In.Value;
+END_IF;
+(* '<S3>:1:10' bad = false; *)
+bad := FALSE;
+END_FUNCTION_BLOCK
+FUNCTION_BLOCK PL_DiIn
+VAR_INPUT
+    SimOn: BOOL;
+    SimPV_In: BOOL;
+    PV_In: DigValRaw;
+END_VAR
+VAR_OUTPUT
+    PV_Out: DigVal;
+    bad: BOOL;
+END_VAR
+VAR
+END_VAR
+(* dffgdf *)
+(* MATLAB Function 'Channel/PL_DiIn': '<S2>:1' *)
+(* '<S2>:1:6' if SimOn *)
+IF SimOn THEN 
+    (* '<S2>:1:7' PV_Out.Value = SimPV_In; *)
+    PV_Out.Value := SimPV_In;
+    (* '<S2>:1:8' PV_Out.QC = int16(QCcodes.Simulation); *)
+    PV_Out.QC := 96;
+ELSE 
+    (* '<S2>:1:9' else *)
+    (* '<S2>:1:10' PV_Out.Value = PV_In.Value; *)
+    PV_Out.Value := PV_In.Value;
+    (* '<S2>:1:11' PV_Out.QC = PV_In.QC; *)
+    PV_Out.QC := PV_In.QC;
+END_IF;
+(* '<S2>:1:14' bad = PV_In.QC == QCcodes.Bad; *)
+bad := PV_In.QC = 0;
+END_FUNCTION_BLOCK
+FUNCTION_BLOCK Channel
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+    ground: BOOL;
+    b_ground: BOOL;
+    c_ground: DigValRaw;
+    d_ground: DigVal;
+    e_ground: INT;
+    f_ground: BOOL;
+    g_ground: BOOL;
+    i0_PL_DiIn: PL_DiIn;
+    i0_PL_DiOu: PL_DiOu;
+    rtb_PV_Out: DigVal;
+    rtb_bad_n: BOOL;
+    rtb_bad: BOOL;
+END_VAR
+i0_PL_DiIn(SimOn := ground, SimPV_In := b_ground, PV_In := c_ground);
+rtb_PV_Out := i0_PL_DiIn.PV_Out;
+rtb_bad_n := i0_PL_DiIn.bad;
+i0_PL_DiOu(PV_In := d_ground, PV_QC := e_ground, SimOn := f_ground, SimPV_In := g_ground);
+rtb_bad_n := i0_PL_DiOu.PV_Out;
+rtb_bad := i0_PL_DiOu.bad;
+END_FUNCTION_BLOCK
